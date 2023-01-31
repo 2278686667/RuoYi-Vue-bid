@@ -45,7 +45,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectBidListVo"/>
         where proj_id = #{projId}
     </select>
-        
+    <select id="seleValidBidList" resultMap="BidListResult">
+        <include refid="selectBidListVo"></include> where proj_end &lt; SYSDATE() and status=1
+    </select>
+
+
     <insert id="insertBidList" parameterType="BidList">
         insert into bid_list
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -61,4 +61,10 @@ public interface IBidListService
     public int deleteBidListByProjId(Long projId);
 
     AjaxResult updateByStatus(BidList bidList);
+
+    /**
+     * 查询投标有效时间所有列表
+     * @return
+     */
+    public List<BidList> seleValidBidList();
 }

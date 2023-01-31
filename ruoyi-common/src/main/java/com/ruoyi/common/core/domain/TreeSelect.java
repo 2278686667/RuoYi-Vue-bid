@@ -30,7 +30,12 @@ public class TreeSelect implements Serializable
     {
 
     }
-
+//    public TreeSelect(FolderStructure folderStructure)
+//    {
+//        this.id = folderStructure.getFolderId();
+//        this.label = folderStructure.getFolderName();
+//        this.children = folderStructure.getChildren().stream().map(TreeSelect::new).collect(Collectors.toList());
+//    }
     public TreeSelect(SysDept dept)
     {
         this.id = dept.getDeptId();

@@ -60,4 +60,6 @@ public interface BidListMapper
     public int deleteBidListByProjIds(Long[] projIds);
 
     Integer updateByStatus(BidList bidList);
+
+    List<BidList> seleValidBidList();
 }

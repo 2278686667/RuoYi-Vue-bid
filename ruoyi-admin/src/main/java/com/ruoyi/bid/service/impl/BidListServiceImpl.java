@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
-import org.aspectj.weaver.loadtime.Aj;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.bid.mapper.BidListMapper;
@@ -108,12 +107,18 @@ public class BidListServiceImpl implements IBidListService
 
         bidList.setStatus((Integer.valueOf(bidList.getStatus())+1)+"");
 //        时间大于0表似乎时间过期了，
-        if (bidList.getProjEnd().compareTo(new Date())<0){
-            System.out.println(bidList.getProjEnd().compareTo(new Date()));
-
-            return AjaxResult.error("时间过期了，修改投标截止时间");
-        }
+//        if (bidList.getProjEnd().compareTo(new Date())<0){
+//            System.out.println(bidList.getProjEnd().compareTo(new Date()));
+//
+//            return AjaxResult.error("时间过期了，修改投标截止时间");
+//        }
         bidListMapper.updateByStatus(bidList);
         return AjaxResult.success("发售成功");
+    }
+
+    @Override
+    public List<BidList> seleValidBidList() {
+        List<BidList> bidLists = bidListMapper.seleValidBidList();
+        return bidLists;
     }
 }
