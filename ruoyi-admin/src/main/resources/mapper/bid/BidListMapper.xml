@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bid.mapper.BidListMapper">
+    
+    <resultMap type="BidList" id="BidListResult">
+        <result property="projId"    column="proj_id"    />
+        <result property="projName"    column="proj_name"    />
+        <result property="projNumber"    column="proj_number"    />
+        <result property="purchaserOrg"    column="purchaser_org"    />
+        <result property="purchaser"    column="purchaser"    />
+        <result property="projTender"    column="proj_tender"    />
+        <result property="tenderTemp"    column="tender_temp"    />
+        <result property="projPwd"    column="proj_pwd"    />
+        <result property="projEnd"    column="proj_end"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectBidListVo">
+        select proj_id, proj_name, proj_number, purchaser_org, purchaser, proj_tender, tender_temp, proj_pwd, proj_end, status, create_by, create_time, update_by, update_time, remark from bid_list
+    </sql>
+
+    <select id="selectBidListList" parameterType="BidList" resultMap="BidListResult">
+        <include refid="selectBidListVo"/>
+        <where>  
+            <if test="projName != null  and projName != ''"> and proj_name like concat('%', #{projName}, '%')</if>
+            <if test="projNumber != null  and projNumber != ''"> and proj_number = #{projNumber}</if>
+            <if test="purchaserOrg != null  and purchaserOrg != ''"> and purchaser_org = #{purchaserOrg}</if>
+            <if test="purchaser != null  and purchaser != ''"> and purchaser = #{purchaser}</if>
+            <if test="projTender != null  and projTender != ''"> and proj_tender = #{projTender}</if>
+            <if test="tenderTemp != null  and tenderTemp != ''"> and tender_temp = #{tenderTemp}</if>
+            <if test="projPwd != null  and projPwd != ''"> and proj_pwd = #{projPwd}</if>
+            <if test="projEnd != null "> and proj_end = #{projEnd}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectBidListByProjId" parameterType="Long" resultMap="BidListResult">
+        <include refid="selectBidListVo"/>
+        where proj_id = #{projId}
+    </select>
+        
+    <insert id="insertBidList" parameterType="BidList">
+        insert into bid_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projId != null">proj_id,</if>
+            <if test="projName != null">proj_name,</if>
+            <if test="projNumber != null">proj_number,</if>
+            <if test="purchaserOrg != null">purchaser_org,</if>
+            <if test="purchaser != null">purchaser,</if>
+            <if test="projTender != null">proj_tender,</if>
+            <if test="tenderTemp != null">tender_temp,</if>
+            <if test="projPwd != null">proj_pwd,</if>
+            <if test="projEnd != null">proj_end,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projId != null">#{projId},</if>
+            <if test="projName != null">#{projName},</if>
+            <if test="projNumber != null">#{projNumber},</if>
+            <if test="purchaserOrg != null">#{purchaserOrg},</if>
+            <if test="purchaser != null">#{purchaser},</if>
+            <if test="projTender != null">#{projTender},</if>
+            <if test="tenderTemp != null">#{tenderTemp},</if>
+            <if test="projPwd != null">#{projPwd},</if>
+            <if test="projEnd != null">#{projEnd},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateBidList" parameterType="BidList">
+        update bid_list
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projName != null">proj_name = #{projName},</if>
+            <if test="projNumber != null">proj_number = #{projNumber},</if>
+            <if test="purchaserOrg != null">purchaser_org = #{purchaserOrg},</if>
+            <if test="purchaser != null">purchaser = #{purchaser},</if>
+            <if test="projTender != null">proj_tender = #{projTender},</if>
+            <if test="tenderTemp != null">tender_temp = #{tenderTemp},</if>
+            <if test="projPwd != null">proj_pwd = #{projPwd},</if>
+            <if test="projEnd != null">proj_end = #{projEnd},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where proj_id = #{projId}
+    </update>
+
+    <delete id="deleteBidListByProjId" parameterType="Long">
+        delete from bid_list where proj_id = #{projId}
+    </delete>
+
+    <delete id="deleteBidListByProjIds" parameterType="String">
+        delete from bid_list where proj_id in 
+        <foreach item="projId" collection="array" open="(" separator="," close=")">
+            #{projId}
+        </foreach>
+    </delete>
+
+    <update id="updateByStatus" parameterType="com.ruoyi.bid.domain.BidList">
+        update bid_list set status=#{status} where proj_id=#{projId}
+    </update>
+</mapper>
