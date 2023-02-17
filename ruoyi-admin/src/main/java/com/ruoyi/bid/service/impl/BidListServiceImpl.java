@@ -3,13 +3,22 @@ package com.ruoyi.bid.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.ruoyi.bid.domain.FileInfomation;
+import com.ruoyi.bid.domain.FolderStructure;
+import com.ruoyi.bid.enums.FolderStructureState;
+import com.ruoyi.bid.mapper.FileInfomationMapper;
+import com.ruoyi.bid.mapper.FolderStructureMapper;
+import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.bid.mapper.BidListMapper;
 import com.ruoyi.bid.domain.BidList;
 import com.ruoyi.bid.service.IBidListService;
+
+import javax.annotation.Resource;
 
 /**
  * 招投标Service业务层处理
@@ -17,11 +26,18 @@ import com.ruoyi.bid.service.IBidListService;
  * @author chb
  * @date 2022-11-27
  */
+@Slf4j
 @Service
 public class BidListServiceImpl implements IBidListService 
 {
     @Autowired
     private BidListMapper bidListMapper;
+
+    @Resource
+    private FileInfomationMapper fileInfomationMapper;
+
+    @Resource
+    private FolderStructureMapper folderStructureMapper;
 
     /**
      * 查询招投标
@@ -57,7 +73,40 @@ public class BidListServiceImpl implements IBidListService
     public int insertBidList(BidList bidList)
     {
         bidList.setCreateTime(DateUtils.getNowDate());
-        return bidListMapper.insertBidList(bidList);
+        int i = bidListMapper.insertBidList(bidList);
+
+        //文件柜中添加招标文件数据
+        instFolderStructureFile(bidList,FolderStructureState.BIDDING_DOCUMENT,2L);
+        //文件柜中添加投标文件数据
+        instFolderStructureFile(bidList,FolderStructureState.TENDER_DOCUMENT,1L);
+        return i;
+    }
+    //对文件夹进行添加
+    private void instFolderStructureFile(BidList bidList,FolderStructureState folderStructureState,Long parentIdTBZB) {
+
+        //文件夹信息
+        FolderStructure folderStructure=new FolderStructure();
+        folderStructure.setProjId(bidList.getProjId().toString()); //项目id
+        //父级id 投标类
+        folderStructure.setParentId(parentIdTBZB);
+        folderStructure.setFolderName(folderStructureState.getType());
+        folderStructure.setFolderPath(RuoYiConfig.getDownloadPath()); //路径
+        log.info("添加文件夹信息{}",folderStructure);
+        //对文件中招标文件添加
+        instFileInfomation(bidList, folderStructure,bidList.getProjTender(),bidList.getTenderTemp());
+        folderStructureMapper.insertFolderStructure(folderStructure);
+
+    }
+    //对文件进行添加
+    private void instFileInfomation(BidList bidList, FolderStructure folderStructure,String ProjTender,String enderTemp) {
+        //添加文件信息
+        FileInfomation fileInfomation=new FileInfomation();
+        fileInfomation.setProjId(bidList.getProjId());//项目id
+        fileInfomation.setFolderId(folderStructure.getFolderId());//文件夹id
+        //文件名称或者文件模板名称
+        fileInfomation.setFileName(ProjTender.substring(ProjTender.lastIndexOf("/") + 1));
+        fileInfomation.setFilePath(enderTemp.substring(enderTemp.lastIndexOf("/") + 1));
+        fileInfomationMapper.insertFileInfomation(fileInfomation);
     }
 
     /**

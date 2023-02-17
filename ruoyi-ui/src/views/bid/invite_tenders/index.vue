@@ -103,6 +103,13 @@
 
     <el-table v-loading="loading" :data="invite_tendersList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
+      <el-table-column label="文件柜" align="center" >
+        <router-link to="www.baidu.com">
+          <i class="el-icon-folder-opened" @click="fileClick">
+
+        </i></router-link>
+
+      </el-table-column>
       <el-table-column label="项目id" align="center" prop="projId" />
       <el-table-column label="项目名称" align="center" prop="projName" />
       <el-table-column label="招标编号" align="center" prop="projNumber" />
@@ -141,7 +148,8 @@
           <el-button type="success" size="mini" v-if="scope.row.status==3">待评标</el-button>
           <el-button type="success" size="mini" v-if="scope.row.status==4">评审中</el-button>
           <el-button type="success" size="mini" v-if="scope.row.status==5">评审完成</el-button>
-          <el-button type="success" size="mini" v-if="scope.row.status>=6">已完成</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.status==6">已完成</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.status>=7">已终止</el-button>
         </template>
 
       </el-table-column>
@@ -306,6 +314,9 @@ export default {
 
 
       })
+    },
+    fileClick(){
+      console.log("文件柜")
     },
     downloadfile(s){
 

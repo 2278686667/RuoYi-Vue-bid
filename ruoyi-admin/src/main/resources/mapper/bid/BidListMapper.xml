@@ -50,7 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
 
-    <insert id="insertBidList" parameterType="BidList">
+    <insert id="insertBidList" parameterType="BidList" useGeneratedKeys="true" keyProperty="projId" >
         insert into bid_list
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="projId != null">proj_id,</if>
