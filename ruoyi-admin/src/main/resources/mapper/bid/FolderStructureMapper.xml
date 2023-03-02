@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bid.mapper.FolderStructureMapper">
+    
+    <resultMap type="FolderStructure" id="FolderStructureResult">
+        <result property="folderId"    column="folder_id"    />
+        <result property="parentId"    column="parent_id"    />
+        <result property="projId"    column="proj_Id"    />
+        <result property="folderName"    column="folder_name"    />
+        <result property="folderPath"    column="folder_path"    />
+        <result property="status"    column="status"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFolderStructureVo">
+        select folder_id, parent_id, proj_Id, folder_name, folder_path, status, update_by, create_time, update_time, is_deleted, remark from folder_structure
+    </sql>
+
+    <select id="selectFolderStructureList" parameterType="FolderStructure" resultMap="FolderStructureResult">
+        <include refid="selectFolderStructureVo"/>
+        <where>  
+            <if test="parentId != null "> and parent_id = #{parentId}</if>
+            <if test="projId != null  and projId != ''"> and proj_Id = #{projId}</if>
+            <if test="folderName != null  and folderName != ''"> and folder_name like concat('%', #{folderName}, '%')</if>
+            <if test="folderPath != null  and folderPath != ''"> and folder_path = #{folderPath}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="isDeleted != null "> and is_deleted = #{isDeleted}</if>
+        </where>
+    </select>
+    
+    <select id="selectFolderStructureByFolderId" parameterType="Long" resultMap="FolderStructureResult">
+        <include refid="selectFolderStructureVo"/>
+        where folder_id = #{folderId}
+    </select>
+    <select id="selectFolderStructureByProjId" resultMap="FolderStructureResult">
+        <include refid="selectFolderStructureVo"/>
+        <where>
+            <if test="projId != null  and projId != ''"> and proj_Id = #{projId}</if>
+            <if test="folderName != null  and folderName != ''"> and folder_name like  #{folderName}</if>
+        </where>
+    </select>
+
+    <insert id="insertFolderStructure" parameterType="FolderStructure" useGeneratedKeys="true" keyProperty="folderId">
+        insert into folder_structure
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">parent_id,</if>
+            <if test="projId != null">proj_Id,</if>
+            <if test="folderName != null">folder_name,</if>
+            <if test="folderPath != null">folder_path,</if>
+            <if test="status != null">status,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="parentId != null">#{parentId},</if>
+            <if test="projId != null">#{projId},</if>
+            <if test="folderName != null">#{folderName},</if>
+            <if test="folderPath != null">#{folderPath},</if>
+            <if test="status != null">#{status},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFolderStructure" parameterType="FolderStructure">
+        update folder_structure
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="projId != null">proj_Id = #{projId},</if>
+            <if test="folderName != null">folder_name = #{folderName},</if>
+            <if test="folderPath != null">folder_path = #{folderPath},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where folder_id = #{folderId}
+    </update>
+
+    <delete id="deleteFolderStructureByFolderId" parameterType="Long">
+        delete from folder_structure where folder_id = #{folderId}
+    </delete>
+
+    <delete id="deleteFolderStructureByFolderIds" parameterType="String">
+        delete from folder_structure where folder_id in 
+        <foreach item="folderId" collection="array" open="(" separator="," close=")">
+            #{folderId}
+        </foreach>
+    </delete>
+</mapper>

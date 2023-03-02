@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bid.mapper.FileInfomationMapper">
+    
+    <resultMap type="FileInfomation" id="FileInfomationResult">
+        <result property="fileId"    column="file_id"    />
+        <result property="projId"    column="proj_Id"    />
+        <result property="folderId"    column="folder_id"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="filePath"    column="file_path"    />
+        <result property="filePwd"    column="file_pwd"    />
+        <result property="orderNum"    column="order_num"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="isDeleted"    column="is_deleted"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectFileInfomationVo">
+        select file_id, proj_Id, folder_id, file_name, file_path, file_pwd, order_num, status, create_by, create_time, update_by, update_time, is_deleted, remark from file_infomation
+    </sql>
+
+    <select id="selectFileInfomationList" parameterType="FileInfomation" resultMap="FileInfomationResult">
+        <include refid="selectFileInfomationVo"/>
+        <where>  
+            <if test="projId != null  and projId != ''"> and proj_Id = #{projId}</if>
+            <if test="folderId != null "> and folder_id = #{folderId}</if>
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="filePath != null  and filePath != ''"> and file_path = #{filePath}</if>
+            <if test="filePwd != null  and filePwd != ''"> and file_pwd = #{filePwd}</if>
+            <if test="orderNum != null "> and order_num = #{orderNum}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="isDeleted != null "> and is_deleted = #{isDeleted}</if>
+        </where>
+    </select>
+    
+    <select id="selectFileInfomationByFileId" parameterType="Long" resultMap="FileInfomationResult">
+        <include refid="selectFileInfomationVo"/>
+        where file_id = #{fileId}
+    </select>
+    <select id="selectFileInfomationByFolderId" resultMap="FileInfomationResult">
+        <include refid="selectFileInfomationVo"/>
+        where folder_id = #{folderId}
+    </select>
+    <select id="selectFileInfomationByFolderIdAndProjId" resultMap="FileInfomationResult">
+        select file_id, proj_Id, folder_id, file_name, file_path, file_pwd, order_num, status, create_by, create_time, update_by, update_time, is_deleted, remark from file_infomation
+        where folder_id = #{folderId} and proj_id=#{projId}
+    </select>
+
+    <insert id="insertFileInfomation" parameterType="FileInfomation" useGeneratedKeys="true" keyProperty="fileId">
+        insert into file_infomation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projId != null">proj_Id,</if>
+            <if test="folderId != null">folder_id,</if>
+            <if test="fileName != null">file_name,</if>
+            <if test="filePath != null">file_path,</if>
+            <if test="filePwd != null">file_pwd,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="status != null">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="isDeleted != null">is_deleted,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projId != null">#{projId},</if>
+            <if test="folderId != null">#{folderId},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="filePath != null">#{filePath},</if>
+            <if test="filePwd != null">#{filePwd},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="isDeleted != null">#{isDeleted},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFileInfomation" parameterType="FileInfomation">
+        update file_infomation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projId != null">proj_Id = #{projId},</if>
+            <if test="folderId != null">folder_id = #{folderId},</if>
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="filePath != null">file_path = #{filePath},</if>
+            <if test="filePwd != null">file_pwd = #{filePwd},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="isDeleted != null">is_deleted = #{isDeleted},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where file_id = #{fileId}
+    </update>
+
+    <delete id="deleteFileInfomationByFileId" parameterType="Long">
+        delete from file_infomation where file_id = #{fileId}
+    </delete>
+
+    <delete id="deleteFileInfomationByFileIds" parameterType="String">
+        delete from file_infomation where file_id in 
+        <foreach item="fileId" collection="array" open="(" separator="," close=")">
+            #{fileId}
+        </foreach>
+    </delete>
+</mapper>

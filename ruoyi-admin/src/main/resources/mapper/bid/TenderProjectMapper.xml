@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bid.mapper.TenderProjectMapper">
+    
+    <resultMap type="TenderProject" id="TenderProjectResult">
+        <result property="tpId"    column="tp_id"    />
+        <result property="bidderId"    column="bidder_id"    />
+        <result property="projId"    column="proj_id"    />
+        <result property="fielId"    column="fiel_id"    />
+        <result property="projName"    column="proj_name"    />
+        <result property="projNumber"    column="proj_number"    />
+        <result property="purchaser"    column="purchaser"    />
+        <result property="bidderCompany"    column="bidder_company"    />
+        <result property="fileName"    column="file_name"    />
+        <result property="uploadBy"    column="upload_by"    />
+        <result property="uploadTime"    column="upload_time"    />
+        <result property="status"    column="status"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectTenderProjectVo">
+        select tp_id, bidder_id, proj_id, fiel_id, proj_name, proj_number, purchaser, bidder_company, file_name, upload_by, upload_time, status, remark from tender_project
+    </sql>
+
+    <select id="selectTenderProjectList" parameterType="TenderProject" resultMap="TenderProjectResult">
+        <include refid="selectTenderProjectVo"/>
+        <where>  
+            <if test="bidderId != null "> and bidder_id = #{bidderId}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+            <if test="fielId != null "> and fiel_id = #{fielId}</if>
+            <if test="projName != null  and projName != ''"> and proj_name like concat('%', #{projName}, '%')</if>
+            <if test="projNumber != null  and projNumber != ''"> and proj_number = #{projNumber}</if>
+            <if test="purchaser != null  and purchaser != ''"> and purchaser = #{purchaser}</if>
+            <if test="bidderCompany != null  and bidderCompany != ''"> and bidder_company = #{bidderCompany}</if>
+            <if test="fileName != null  and fileName != ''"> and file_name like concat('%', #{fileName}, '%')</if>
+            <if test="uploadBy != null  and uploadBy != ''"> and upload_by = #{uploadBy}</if>
+            <if test="uploadTime != null "> and upload_time = #{uploadTime}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectTenderProjectByTpId" parameterType="Long" resultMap="TenderProjectResult">
+        <include refid="selectTenderProjectVo"/>
+        where tp_id = #{tp_id}
+    </select>
+    <select id="selectTenderProjectByProjId"  resultMap="TenderProjectResult">
+        <include refid="selectTenderProjectVo"/>
+            <if test="array!=null">
+                where proj_id in
+                <foreach item="projId" collection="array" open="(" separator="," close=")">
+                    #{projId}
+                </foreach>
+            </if>
+
+    </select>
+    <select id="selectTenderProjectByProjIdOne" resultMap="TenderProjectResult">
+        <include refid="selectTenderProjectVo"/>
+        where proj_id = #{projId}
+    </select>
+
+    <insert id="insertTenderProject" parameterType="TenderProject" useGeneratedKeys="true" keyProperty="tpId">
+        insert into tender_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bidderId != null">bidder_id,</if>
+            <if test="projId != null">proj_id,</if>
+            <if test="fielId != null">fiel_id,</if>
+            <if test="projName != null">proj_name,</if>
+            <if test="projNumber != null">proj_number,</if>
+            <if test="purchaser != null">purchaser,</if>
+            <if test="bidderCompany != null">bidder_company,</if>
+            <if test="fileName != null">file_name,</if>
+            <if test="uploadBy != null">upload_by,</if>
+            <if test="uploadTime != null">upload_time,</if>
+            <if test="status != null">status,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bidderId != null">#{bidderId},</if>
+            <if test="projId != null">#{projId},</if>
+            <if test="fielId != null">#{fielId},</if>
+            <if test="projName != null">#{projName},</if>
+            <if test="projNumber != null">#{projNumber},</if>
+            <if test="purchaser != null">#{purchaser},</if>
+            <if test="bidderCompany != null">#{bidderCompany},</if>
+            <if test="fileName != null">#{fileName},</if>
+            <if test="uploadBy != null">#{uploadBy},</if>
+            <if test="uploadTime != null">#{uploadTime},</if>
+            <if test="status != null">#{status},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTenderProject" parameterType="TenderProject">
+        update tender_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bidderId != null">bidder_id = #{bidderId},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+            <if test="fielId != null">fiel_id = #{fielId},</if>
+            <if test="projName != null">proj_name = #{projName},</if>
+            <if test="projNumber != null">proj_number = #{projNumber},</if>
+            <if test="purchaser != null">purchaser = #{purchaser},</if>
+            <if test="bidderCompany != null">bidder_company = #{bidderCompany},</if>
+            <if test="fileName != null">file_name = #{fileName},</if>
+            <if test="uploadBy != null">upload_by = #{uploadBy},</if>
+            <if test="uploadTime != null">upload_time = #{uploadTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where tp_id = #{tpId}
+    </update>
+
+    <delete id="deleteTenderProjectByTpId" parameterType="Long">
+        delete from tender_project where tp_id = #{tpId}
+    </delete>
+
+    <delete id="deleteTenderProjectByTpIds" parameterType="String">
+        delete from tender_project where tp_id in 
+        <foreach item="tpId" collection="array" open="(" separator="," close=")">
+            #{tpId}
+        </foreach>
+    </delete>
+</mapper>
