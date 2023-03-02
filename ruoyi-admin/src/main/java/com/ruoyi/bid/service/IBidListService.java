@@ -67,4 +67,11 @@ public interface IBidListService
      * @return
      */
     public List<BidList> seleValidBidList();
+
+    /**
+     * 查询发售中的列表信息
+     * @param bidList
+     * @return
+     */
+    List<BidList> selectBidBySale(BidList bidList);
 }

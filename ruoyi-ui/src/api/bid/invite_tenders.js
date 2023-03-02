@@ -51,3 +51,21 @@ export function lssue_of_tender(row) {
     data:row
   })
 }
+
+//随机生成专家
+export function randomExpert(query){
+  return request({
+    url:"/bid/invite_tenders/randomExpert",
+    method: 'get',
+    params: query
+  })
+}
+
+//开始评标，生成评标信息
+export function startEvaluation(data){
+  return request({
+    url: '/bid/invite_tenders/startEvaluation',
+    method: 'post',
+    data: data
+  })
+}

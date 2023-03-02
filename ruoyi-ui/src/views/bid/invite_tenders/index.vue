@@ -33,14 +33,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="提取码" prop="projPwd">
-        <el-input
-          v-model="queryParams.projPwd"
-          placeholder="请输入提取码"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+
       <el-form-item label="投标截止时间" prop="projEnd">
         <el-date-picker clearable
           v-model="queryParams.projEnd"
@@ -104,11 +97,15 @@
     <el-table v-loading="loading" :data="invite_tendersList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="文件柜" align="center" >
-        <router-link to="www.baidu.com">
+
+        <template slot-scope="scope">
+          {{scope.row.projId}}
+          <router-link
+            :to="`/bid/folder?id=${scope.row.projId}`">
           <i class="el-icon-folder-opened" @click="fileClick">
 
         </i></router-link>
-
+        </template>
       </el-table-column>
       <el-table-column label="项目id" align="center" prop="projId" />
       <el-table-column label="项目名称" align="center" prop="projName" />
@@ -168,20 +165,34 @@
             @click="lssue_of_tender(scope.row)"
           >发售
           </el-button>
-          <el-button
+          <el-button v-if="scope.row.status==0"
             size="mini"
             type="text"
             icon="el-icon-edit"
             @click="handleUpdate(scope.row)"
             v-hasPermi="['bid:invite_tenders:edit']"
           >修改</el-button>
-          <el-button
+          <el-button v-if="scope.row.status<2"
             size="mini"
             type="text"
             icon="el-icon-delete"
             @click="handleDelete(scope.row)"
             v-hasPermi="['bid:invite_tenders:remove']"
           >删除</el-button>
+          <el-button v-if="scope.row.status==2"
+                     size="mini"
+                     type="text"
+                     icon="el-icon-s-marketing"
+                     @click="pingbiao(scope.row)"
+                     v-hasPermi="['bid:invite_tenders:remove']"
+          >评标</el-button>
+          <el-button v-if="scope.row.status>=2"
+                     size="mini"
+                     type="text"
+                     icon="el-icon-delete"
+                     @click="zhongzhi(scope.row)"
+                     v-hasPermi="['bid:invite_tenders:remove']"
+          >终止</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -234,6 +245,47 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+<!--    评标对话框-->
+    <el-dialog :title="title" :visible.sync="pingbiaoopen" width="500px">
+      <el-form :model="form" :rules="rulesping">
+        <el-form-item label="项目名称" label-width="120px">
+          <el-input v-model="form.projName" ></el-input>
+        </el-form-item>
+        <el-form-item label="评标文件" label-width="120px">
+          <file-upload v-model="form.pingbiaowj"/>
+        </el-form-item>
+        <el-form-item label="本次评标需要" label-width="120px" prop="count">
+          <el-input v-model.nmber="form.count" autocomplete="off" style="width: 50px"></el-input>名专家
+        </el-form-item>
+        <el-form-item label="评审专家授权" label-width="120px">
+          <el-select v-model="form.auth" multiple placeholder="请选择">
+            <el-option
+              v-for="item in randomFormData"
+              :key="item.userId"
+              :label="item.userName"
+              :value="item.userId">
+            </el-option>
+          </el-select>
+
+          <el-button @click="random">随机生成</el-button>
+        </el-form-item>
+        <el-form-item label="评委组长授权" label-width="120px">
+          <el-select v-model="form.groupLeaders" placeholder="请选择">
+            <el-option
+              v-for="item in randomFormData"
+              :key="item.userId"
+              :label="item.userName"
+              :value="item.userId">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -244,7 +296,9 @@ import {
   delInvite_tenders,
   addInvite_tenders,
   updateInvite_tenders,
-  lssue_of_tender
+  lssue_of_tender,
+  startEvaluation,
+  randomExpert
 } from "@/api/bid/invite_tenders";
 import {getToken} from "@/utils/auth";
 
@@ -252,6 +306,7 @@ export default {
   name: "Invite_tenders",
   data() {
     return {
+      updateUrl:process.env.VUE_APP_BASE_API+"/bid/invite_tenders/uploadFile",
       fileList: [],
       number: 0,
       uploadList: [],
@@ -276,6 +331,7 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      pingbiaoopen:false,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -290,6 +346,12 @@ export default {
         projEnd: null,
         status: null,
       },
+      randomData:{
+        data:null
+      },
+      randomFormData:{
+
+      },
       // 表单参数
       form: {},
       // 表单校验
@@ -297,15 +359,40 @@ export default {
         createTime: [
           { required: true, message: "创建时间不能为空", trigger: "blur" }
         ],
+      },
+      rulesping:{
+        count:[
+          { required: true, message: "评标专家数量不能为空", trigger: "blur" }
+        ]
       }
     };
   },
   created() {
-    this.getList();
 
+    this.getList();
 
   },
   methods: {
+    //评标
+    dialogFormVisible(){
+      startEvaluation(this.form).then(res=>{
+        var v={'projId':this.form.projId,'status':this.form.status}
+        lssue_of_tender(v).then(res=>{
+          this.$message.success("评标成功")
+          this.getList();
+          this.pingbiaoopen=false
+        })
+      })
+    },
+    //随机生成
+    random(randomData){
+      randomData.data=this.form.count
+      console.log(randomData)
+
+      randomExpert(randomData).then(res=>{
+        this.randomFormData=res.data;
+      })
+    },
     lssue_of_tender(row){
       lssue_of_tender(row).then(response=>{
 
@@ -331,6 +418,7 @@ export default {
     /** 查询招投标列表 */
     getList() {
       this.loading = true;
+      console.log(this.queryParams)
       listInvite_tenders(this.queryParams).then(response => {
         this.invite_tendersList = response.rows;
         this.total = response.total;
@@ -427,6 +515,16 @@ export default {
         this.getList();
         this.$modal.msgSuccess("删除成功");
       }).catch(() => {});
+    },
+    pingbiao(row){
+      this.reset();
+      const projId = row.projId || this.ids
+      getInvite_tenders(projId).then(response => {
+        this.form = response.data;
+        this.pingbiaoopen = true;
+        this.title = "评标";
+
+      });
     },
     /** 导出按钮操作 */
     handleExport() {

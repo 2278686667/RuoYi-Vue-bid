@@ -203,4 +203,10 @@ public interface ISysUserService
      * @return 结果
      */
     public String importUser(List<SysUser> userList, Boolean isUpdateSupport, String operName);
+
+    /**
+     * 查询所有的投标用户信息
+     * @return
+     */
+    List<SysUser> selectByTender();
 }

@@ -48,6 +48,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="seleValidBidList" resultMap="BidListResult">
         <include refid="selectBidListVo"></include> where proj_end &lt; SYSDATE() and status=1
     </select>
+    <select id="selectBidBySale" resultMap="BidListResult">
+        <include refid="selectBidListVo"></include>
+        <where>
+            <if test="projName != null  and projName != ''"> and proj_name like concat('%', #{projName}, '%')</if>
+            <if test="projNumber != null  and projNumber != ''"> and proj_number = #{projNumber}</if>
+            <if test="purchaserOrg != null  and purchaserOrg != ''"> and purchaser_org = #{purchaserOrg}</if>
+            <if test="purchaser != null  and purchaser != ''"> and purchaser = #{purchaser}</if>
+            <if test="projTender != null  and projTender != ''"> and proj_tender = #{projTender}</if>
+            <if test="tenderTemp != null  and tenderTemp != ''"> and tender_temp = #{tenderTemp}</if>
+            <if test="projPwd != null  and projPwd != ''"> and proj_pwd = #{projPwd}</if>
+            <if test="projEnd != null "> and proj_end = #{projEnd}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
 
 
     <insert id="insertBidList" parameterType="BidList" useGeneratedKeys="true" keyProperty="projId" >

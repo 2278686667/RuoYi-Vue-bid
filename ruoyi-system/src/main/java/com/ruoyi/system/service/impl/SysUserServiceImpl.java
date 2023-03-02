@@ -540,4 +540,9 @@ public class SysUserServiceImpl implements ISysUserService
         }
         return successMsg.toString();
     }
+
+    @Override
+    public List<SysUser> selectByTender() {
+        return userMapper.selectByTender();
+    }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">若依后台管理系统</h3>
+      <h3 class="title">招投标后台管理系统</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -38,6 +38,14 @@
         </div>
       </el-form-item>
       <el-checkbox v-model="loginForm.rememberMe" style="margin:0px 0px 25px 0px;">记住密码</el-checkbox>
+      <div style="margin-bottom: 20px">
+<!--        <el-radio-group v-model="radioUser" size="small">-->
+<!--          <el-radio-button label="招标用户"></el-radio-button>-->
+<!--          <el-radio-button label="投标用户"></el-radio-button>-->
+<!--          <el-radio-button label="评审专家"></el-radio-button>-->
+<!--          <el-radio-button label="系统管理员"></el-radio-button>-->
+<!--        </el-radio-group>-->
+      </div>
       <el-form-item style="width:100%;">
         <el-button
           :loading="loading"
@@ -52,8 +60,12 @@
         <div style="float: right;" v-if="register">
           <router-link class="link-type" :to="'/register'">立即注册</router-link>
         </div>
+        <div style="margin-top: 20px">
+          <el-button type="primary" @click="test">测试</el-button>
+        </div>
       </el-form-item>
     </el-form>
+
     <!--  底部  -->
     <div class="el-login-footer">
       <span>Copyright © 2018-2022 ruoyi.vip All Rights Reserved.</span>
@@ -70,6 +82,7 @@ export default {
   name: "Login",
   data() {
     return {
+      radioUser:'系统管理员',
       codeUrl: "",
       loginForm: {
         username: "admin",
@@ -108,6 +121,9 @@ export default {
     this.getCookie();
   },
   methods: {
+    test(){
+      console.log(this.radioUser)
+    },
     getCode() {
       getCodeImg().then(res => {
         this.captchaEnabled = res.captchaEnabled === undefined ? true : res.captchaEnabled;

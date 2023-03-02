@@ -62,4 +62,6 @@ public interface BidListMapper
     Integer updateByStatus(BidList bidList);
 
     List<BidList> seleValidBidList();
+
+    List<BidList> selectBidBySale(BidList bidList);
 }

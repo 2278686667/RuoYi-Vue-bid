@@ -11,6 +11,7 @@ import com.ruoyi.bid.mapper.FolderStructureMapper;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
+import com.ruoyi.common.utils.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,19 +94,22 @@ public class BidListServiceImpl implements IBidListService
         folderStructure.setFolderPath(RuoYiConfig.getDownloadPath()); //路径
         log.info("添加文件夹信息{}",folderStructure);
         //对文件中招标文件添加
-        instFileInfomation(bidList, folderStructure,bidList.getProjTender(),bidList.getTenderTemp());
         folderStructureMapper.insertFolderStructure(folderStructure);
+        instFileInfomation(bidList, folderStructure,bidList.getProjTender(),bidList.getTenderTemp());
 
     }
     //对文件进行添加
     private void instFileInfomation(BidList bidList, FolderStructure folderStructure,String ProjTender,String enderTemp) {
+        if (StringUtils.isNull(folderStructure.getFolderId())){
+            throw new RuntimeException("文件夹Id不能为空");
+        }
         //添加文件信息
         FileInfomation fileInfomation=new FileInfomation();
         fileInfomation.setProjId(bidList.getProjId());//项目id
         fileInfomation.setFolderId(folderStructure.getFolderId());//文件夹id
         //文件名称或者文件模板名称
         fileInfomation.setFileName(ProjTender.substring(ProjTender.lastIndexOf("/") + 1));
-        fileInfomation.setFilePath(enderTemp.substring(enderTemp.lastIndexOf("/") + 1));
+        fileInfomation.setFilePath(enderTemp);
         fileInfomationMapper.insertFileInfomation(fileInfomation);
     }
 
@@ -168,6 +172,15 @@ public class BidListServiceImpl implements IBidListService
     @Override
     public List<BidList> seleValidBidList() {
         List<BidList> bidLists = bidListMapper.seleValidBidList();
+        return bidLists;
+    }
+
+    @Override
+    public List<BidList> selectBidBySale(BidList bidList) {
+        if (!"1".equals(bidList.getStatus())){
+            throw new RuntimeException("参数错误");
+        }
+        List<BidList> bidLists=bidListMapper.selectBidBySale(bidList);
         return bidLists;
     }
 }

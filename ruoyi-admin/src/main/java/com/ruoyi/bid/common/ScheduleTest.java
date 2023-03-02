@@ -16,6 +16,7 @@ public class ScheduleTest {
     @Autowired
     IBidListService iBidListService;
     //每天晚上触发
+//    @Scheduled(cron = "0/2 * * * * ? ")
     @Scheduled(cron = "0 0 0 * * ? ")
     public void execute(){
         List<BidList> bidLists = iBidListService.seleValidBidList();
