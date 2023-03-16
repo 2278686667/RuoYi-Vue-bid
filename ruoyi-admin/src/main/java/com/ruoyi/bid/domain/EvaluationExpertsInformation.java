@@ -45,6 +45,16 @@ public class EvaluationExpertsInformation extends BaseEntity
     @Excel(name = "项目状态（0待发售 1发售中 2开标中 3 待评标 4评审中 5评审完成 6已终止 7已完成")
     private Integer bidStatus;
 
+    private String isGroupLeaders;
+
+    public String getIsGroupLeaders() {
+        return isGroupLeaders;
+    }
+
+    public void setIsGroupLeaders(String isGroupLeaders) {
+        this.isGroupLeaders = isGroupLeaders;
+    }
+
     public Integer getBidStatus() {
         return bidStatus;
     }

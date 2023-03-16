@@ -97,8 +97,7 @@
       <el-table-column type="selection" width="55" align="center" min-width="8%"/>
       <el-table-column label="是否签到" align="center" prop="signIn" min-width="8%">
         <template slot-scope="scope">
-
-          <el-button type="success" size="mini" v-if="scope.row.signIn==1">签到成功</el-button>
+          <el-button type="success" size="mini" icon="el-icon-check"  v-if="scope.row.signIn==1">签到成功</el-button>
           <el-button type="danger" size="mini" v-else-if="scope.row.signIn==0" @click="signIn(scope.row)">点击签到</el-button>
         </template>
 
@@ -108,29 +107,31 @@
       <el-table-column label="项目编号" align="center" prop="projNumber" min-width="8%"/>
       <el-table-column label="采购人" align="center" prop="purchaser" min-width="8%"/>
       <el-table-column label="采购代理机构" align="center" prop="bidderCompany" min-width="8%"/>
-      <el-table-column label="评审专家Id" align="center" prop="userId" min-width="8%"/>
+<!--      <el-table-column label="评审专家Id" align="center" prop="userId" min-width="8%"/>-->
 <!--      <el-table-column label="文件id" align="center" prop="fileId" />-->
 <!--      <el-table-column label="项目id" align="center" prop="projId" />-->
       <el-table-column label="评审状态" align="center" prop="status" min-width="8%">
         <template slot-scope="scope">
-          <el-button type="success" size="mini" v-if="scope.status==1">已提交</el-button>
-          <el-button type="primary" size="mini" v-else>未提交</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.status==1" round>已提交</el-button>
+          <el-button type="primary" size="mini" v-else round>未提交</el-button>
         </template>
       </el-table-column>
-      <el-table-column label="是否删除(0-未删, 1-已删)" align="center" prop="isDeleted" min-width="8%">
-        <template slot-scope="scope">
-          <el-button type="success" size="mini" v-if="scope.isDeleted==1">已删除</el-button>
-          <el-button type="danger" size="mini" v-else>未删除</el-button>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="是否删除(0-未删, 1-已删)" align="center" prop="isDeleted" min-width="8%">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-button type="success" size="mini" v-if="scope.isDeleted==1">已删除</el-button>-->
+<!--          <el-button type="danger" size="mini" v-else>未删除</el-button>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
 
       <el-table-column label="备注" align="center" prop="remark" min-width="8%"/>
       <el-table-column label="操作" align="center"  min-width="20%">
         <template slot-scope="scope">
-
-          <el-button type="success" size="mini" v-if="scope.row.signIn==1&&scope.row.status==0" @click="downloadReview(scope.row)">下载评审资料</el-button>
-          <el-button type="success" size="mini" v-if="scope.row.signIn==1&&scope.row.status==0" @click="submitReview(scope.row)">提交评审资料</el-button>
-          <el-button type="danger" size="mini" v-if="scope.row.signIn==1&&scope.row.status==1">上传成功</el-button>
+<!--          {{scope.row}}-->
+          <el-button type="success" size="mini" icon="el-icon-upload" v-if="scope.row.signIn==1&&scope.row.status==0" @click="downloadReview(scope.row)">下载评审资料</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-upload2" v-if="scope.row.signIn==1&&scope.row.status==0" @click="submitReview(scope.row)">提交评审资料</el-button>
+          <el-button type="success" size="mini" icon="el-icon-upload" v-if="scope.row.signIn==1&&scope.row.status==1&&scope.row.bidStatus!=5">上传成功</el-button>
+          <el-button type="danger" size="mini" icon="el-icon-upload2" v-if="scope.row.signIn==1&&scope.row.status==1&&scope.row.isGroupLeaders==1&&scope.row.bidStatus!=5" @click="submitReview(scope.row)">上传最终评审资料</el-button>
+          <el-button type="success" size="mini" icon="el-icon-upload" v-if="scope.row.bidStatus==5">评标完成</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -170,13 +171,28 @@
         <el-button @click="cancel">取 消</el-button>
       </div>
     </el-dialog>
+
+
+    <!-- 提交评审资料 -->
+    <el-dialog :title="title" :visible.sync="openfile" width="500px" append-to-body>
+      <el-form ref="form" :model="formEv" :rules="rules" label-width="80px">
+        <el-form-item label="评审资料" >
+          <file-upload v-model="formEv.tenderTemp"/>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitFormFile">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+import {listEvaluation} from "../../../api/file/file";
 import {
-  updateSignIn,
-  listEvaluation_experts_information,listEvaluation_experts_informationBYUserId, getEvaluation_experts_information, delEvaluation_experts_information, addEvaluation_experts_information, updateEvaluation_experts_information
+  updateSignIn,lssue_of_tenderE,
+  listEvaluation_experts_information,listEvaluation_experts_informationBYUserId, getEvaluation_experts_information, delEvaluation_experts_information, addEvaluation_experts_information, updateEvaluation_experts_information,fileUpload
 } from "@/api/system/evaluation_experts_information";
 
 import {
@@ -187,6 +203,8 @@ export default {
   name: "Evaluation_experts_information",
   data() {
     return {
+      formEv:{},
+      openfile:false,
       // 遮罩层
       loading: true,
       // 选中数组
@@ -236,17 +254,57 @@ export default {
     this.getList();
   },
   methods: {
+
+
+    //提交评审资料
+    submitFormFile(row){
+      console.log("---------")
+      console.log(this.formEv)
+      if (this.formEv.isGroupLeaders==1&&row.status==1){
+        lssue_of_tenderE(this.formEv).then(res=>{
+          console.log(res)
+        })
+      }
+      console.log("---------")
+      fileUpload(this.formEv).then(res=>{
+        console.log(res)
+        this.openfile=false;
+        this.getList();
+        this.$message({
+          message: '提交成功',
+          type: 'success'
+        });
+      })
+    },
+
     /**
      * downloadReview 下载评审资料
      */
     downloadReview(row){
-      console.log("下载评审资料")
-      console.log(row)
-
-      // download.resource(row.filePath)
+      listEvaluation(row).then(res=>{
+        console.log(res)
+        download.resource(res.filePath)
+      })
     },
     submitReview(row){
-      console.log("提交评审资料")
+      if(row.isGroupLeaders==1&&row.status==1){
+        console.log("提交最终评审报告")
+        this.openfile=true;
+        this.formEv=row;
+        console.log("this.formEv")
+        console.log(this.formEv)
+        this.title="请提交最终评审报告"
+      }else {
+        console.log("提交评审资料")
+        this.openfile=true;
+        this.formEv=row;        console.log("this.formEv")
+        console.log(this.formEv)
+        console.log(row)
+
+        this.title="请提交评审资料"
+      }
+
+
     },
 
     /**
@@ -267,6 +325,7 @@ export default {
       this.loading = true;
       listEvaluation_experts_informationBYUserId(this.queryParams).then(response => {
         this.evaluation_experts_informationList = response.rows;
+        console.log(this.evaluation_experts_informationList)
         this.total = response.total;
         this.loading = false;
       });
@@ -274,6 +333,7 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
+      this.openfile=false;
       this.reset();
     },
     // 表单重置

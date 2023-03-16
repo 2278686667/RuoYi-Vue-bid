@@ -36,6 +36,9 @@ public class EvaluationExpertsInfomationVO {
     @Excel(name = "是否删除(0-未删, 1-已删)")
     private Long isDeleted;
 
+    private Integer bidStatus;
+
+    private String isGroupLeaders;
 
     /** id */
     private Long tpId;

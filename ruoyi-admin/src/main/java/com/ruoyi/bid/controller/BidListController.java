@@ -134,9 +134,9 @@ public class BidListController extends BaseController
     @PutMapping("/lssue")
     public AjaxResult lssue(@RequestBody BidList bidList){
         Date date=new Date();
-        if (date.compareTo(bidList.getProjEnd())>0){
-            return AjaxResult.error("超过截止发售时间");
-        }
+//        if (date.compareTo(bidList.getProjEnd())>0){
+//            return AjaxResult.error("超过截止发售时间");
+//        }
         return bidListService.updateByStatus(bidList);
     }
     @PreAuthorize("@ss.hasPermi('bid:invite_tenders:query')")
@@ -209,6 +209,8 @@ public class BidListController extends BaseController
         Integer projId = (Integer) map.get("projId");
         List<Integer> auth = (List) map.get("auth");
         String status = (String) map.get("status");
+        Integer isGroupLeaders = (Integer) map.get("groupLeaders");
+
         //文件柜信息
         FolderStructure folderStructure=new FolderStructure();
         folderStructure.setParentId(3L);
@@ -228,8 +230,8 @@ public class BidListController extends BaseController
         fileInfomation.setCreateBy(SecurityUtils.getUsername());
         fileInfomationService.insertFileInfomation(fileInfomation);
 
-        EvaluationExpertsInformation evaluationExpertsInformation = create(projId.longValue(),Long.valueOf(auth.get(0)), fileInfomation,Integer.valueOf(status));
-        EvaluationExpertsInformation evaluationExpertsInformation1 = create(projId.longValue(), Long.valueOf(auth.get(1)), fileInfomation,Integer.valueOf(status));
+        EvaluationExpertsInformation evaluationExpertsInformation = create(projId.longValue(),Long.valueOf(auth.get(0)), fileInfomation,Integer.valueOf(status),isGroupLeaders.longValue());
+        EvaluationExpertsInformation evaluationExpertsInformation1 = create(projId.longValue(), Long.valueOf(auth.get(1)), fileInfomation,Integer.valueOf(status),isGroupLeaders.longValue());
 
         //新增
         iEvaluationExpertsInformationService.insertEvaluationExpertsInformation(evaluationExpertsInformation);
@@ -237,13 +239,16 @@ public class BidListController extends BaseController
 
         return AjaxResult.success();
     }
-    public EvaluationExpertsInformation create(Long projId, Long auth, FileInfomation fileInfomation,Integer status){
+    public EvaluationExpertsInformation create(Long projId, Long auth, FileInfomation fileInfomation,Integer status,Long isGroupLeaders){
         EvaluationExpertsInformation evaluationExpertsInformation=new EvaluationExpertsInformation();
         evaluationExpertsInformation.setProjId(projId);
         evaluationExpertsInformation.setUserId(auth);
         evaluationExpertsInformation.setFileId(fileInfomation.getFileId());
         evaluationExpertsInformation.setCreateBy(SecurityUtils.getUsername());
         evaluationExpertsInformation.setBidStatus(status);
+        int i = isGroupLeaders.equals(auth) ? 1 : 0;
+        System.out.println(i);
+        evaluationExpertsInformation.setIsGroupLeaders(i+"");
 
         return evaluationExpertsInformation;
     }

@@ -65,7 +65,28 @@ public class TenderProject extends BaseEntity
     @Excel(name = "文件状态", readConverterExp = "0=未上传,1=已上传")
     private String status;
 
-    public void setTpId(Long tpId) 
+    private String bidStatus;
+
+
+    private Long userId;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getBidStatus() {
+        return bidStatus;
+    }
+
+    public void setBidStatus(String bidStatus) {
+        this.bidStatus = bidStatus;
+    }
+
+    public void setTpId(Long tpId)
     {
         this.tpId = tpId;
     }

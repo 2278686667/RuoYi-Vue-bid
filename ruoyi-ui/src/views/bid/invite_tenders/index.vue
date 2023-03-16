@@ -97,9 +97,7 @@
     <el-table v-loading="loading" :data="invite_tendersList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="文件柜" align="center" >
-
         <template slot-scope="scope">
-          {{scope.row.projId}}
           <router-link
             :to="`/bid/folder?id=${scope.row.projId}`">
           <i class="el-icon-folder-opened" @click="fileClick">
@@ -112,26 +110,31 @@
       <el-table-column label="招标编号" align="center" prop="projNumber" />
       <el-table-column label="采购代理机构" align="center" prop="purchaserOrg" />
       <el-table-column label="采购人" align="center" prop="purchaser" />
-      <el-table-column label="招标文件" prop="projTender">
+<!--      <el-table-column label="招标文件" prop="projTender">-->
 <!--        <el-upload style="margin-top: -30px"-->
 <!--          :on-preview="handlePreview"-->
 <!--          multiple-->
 <!--          :file-list="fileList">-->
 <!--        </el-upload>-->
-        <template slot-scope="scope">
-          <p @click="downloadfile(scope.row.projTender)">{{invite_tendersList[0].projTender.substring(invite_tendersList[0].projTender.lastIndexOf('/')+1)}}</p>
-        </template>
+<!--        <template slot-scope="scope">-->
+<!--          <p @click="downloadfile(scope.row.projTender)">{{invite_tendersList[0].projTender.substring(invite_tendersList[0].projTender.lastIndexOf('/')+1)}}</p>-->
+<!--        </template>-->
 
-      </el-table-column>
+<!--      </el-table-column>-->
 
 
-      <el-table-column label="投标文件模板" align="center" prop="tenderTemp" >
-        <template slot-scope="scope">
-          <p @click="downloadfile(scope.row.tenderTemp)">{{invite_tendersList[0].tenderTemp.substring(invite_tendersList[0].tenderTemp.lastIndexOf('/')+1)}}</p>
-        </template>
+<!--      <el-table-column label="投标文件模板" align="center" prop="tenderTemp" >-->
+<!--        <template slot-scope="scope">-->
+<!--          <p @click="downloadfile(scope.row.tenderTemp)">{{invite_tendersList[0].tenderTemp.substring(invite_tendersList[0].tenderTemp.lastIndexOf('/')+1)}}</p>-->
+<!--        </template>-->
 <!--        <a v-if="tenderTemp!=null" :href="'http://localhost:8080'+invite_tendersList[0].tenderTemp">{{ (invite_tendersList[0].tenderTemp.substring(invite_tendersList[0].tenderTemp.lastIndexOf('/')+1))}}</a>-->
+<!--      </el-table-column>-->
+      <el-table-column label="提取码" align="center" prop="projPwd">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="tiquma(scope.row)">提取码</el-button>
+        </template>
+
       </el-table-column>
-      <el-table-column label="提取码" align="center" prop="projPwd" />
       <el-table-column label="投标截止时间" align="center" prop="projEnd" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.projEnd, '{y}-{m}-{d}') }}</span>
@@ -205,7 +208,7 @@
     />
 
     <!-- 添加或修改招投标对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
+    <el-dialog :title="title" :visible.sync="open" width="1000px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="项目名称" prop="projName">
           <el-input v-model="form.projName" placeholder="请输入项目名称" />
@@ -286,6 +289,20 @@
         <el-button type="primary" @click="dialogFormVisible">确 定</el-button>
       </div>
     </el-dialog>
+
+    <el-dialog :title="title" :visible.sync="tiqumaOpen" width="500px">
+      <el-form :model="form">
+        <el-form-item label="项目名称"  label-width="120px">
+          <el-input v-model="form.projName" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="项目编号"  label-width="120px">
+          <el-input v-model="form.projNumber" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="提取码" label-width="120px">
+          <el-input v-model="form.projPwd" ></el-input>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -331,6 +348,7 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      tiqumaOpen:false,
       pingbiaoopen:false,
       // 查询参数
       queryParams: {
@@ -373,10 +391,37 @@ export default {
 
   },
   methods: {
+  //提取码
+    tiquma(row){
+      this.form=row
+      this.title='提取码';
+      this.tiqumaOpen=true;
+    },
+    //终止评标
+    zhongzhi(row){
+      this.$confirm('此操作将终止该项目, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '终止成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消终止操作'
+        });
+      });
+    },
     //评标
     dialogFormVisible(){
+      console.log("评标")
+      console.log(this.form);
       startEvaluation(this.form).then(res=>{
-        var v={'projId':this.form.projId,'status':this.form.status}
+
+        var v={'projId':this.form.projId,'status':this.form.status,'projEnd':this.form.projEnd}
         lssue_of_tender(v).then(res=>{
           this.$message.success("评标成功")
           this.getList();
@@ -421,6 +466,9 @@ export default {
       console.log(this.queryParams)
       listInvite_tenders(this.queryParams).then(response => {
         this.invite_tendersList = response.rows;
+        for (let i = 0; i <this.invite_tendersList; i++) {
+          this.invite_tendersList.projTender[i]=(this.invite_tendersList[i].substring(this.invite_tendersList[i].lastIndexOf('/')+1));
+        }
         this.total = response.total;
         this.loading = false;
         this.sss();

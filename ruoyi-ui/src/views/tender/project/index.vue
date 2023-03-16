@@ -124,6 +124,18 @@
           <el-button type="success" size="mini" v-if="scope.row.status==1">已上传</el-button>
         </template>
       </el-table-column>
+      <el-table-column label="项目" align="center" prop="bidStatus" >
+        <template slot-scope="scope">
+          <el-button type="primary" size="mini" v-if="scope.row.bidStatus==0">待发售</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.bidStatus==1">发售中</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.bidStatus==2">开标中</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.bidStatus==3">待评标</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.bidStatus==4">评审中</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.bidStatus==5">评审完成</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.bidStatus==6">已完成</el-button>
+          <el-button type="success" size="mini" v-if="scope.row.bidStatus>=7">已终止</el-button>
+        </template>
+      </el-table-column>
       <el-table-column label="备注" align="center" prop="remark">
         <template slot-scope="scope">
           <p v-html="scope.row.remark"></p>
@@ -144,8 +156,16 @@
             size="mini"
             type="success"
             @click="handleUpdateFile(scope.row)"
+            icon="el-icon-s-promotion"
             v-hasPermi="['tender:project:remove']"
           >文件上传</el-button>
+          <el-button
+            v-if="scope.row.status==0&&scope.row.bidStatus>2"
+            size="mini"
+            type="success"
+            @click="handleUpdateFile(scope.row)"
+            v-hasPermi="['tender:project:remove']"
+          >投标时间已过</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -309,6 +329,7 @@ export default {
       console.log("测试")
       this.loading = true;
       listProject(this.queryParams).then(response => {
+        console.log(response.rows)
         this.projectList = response.rows;
         this.total = response.total;
         this.loading = false;

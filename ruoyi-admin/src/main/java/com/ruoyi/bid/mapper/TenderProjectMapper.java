@@ -1,6 +1,8 @@
 package com.ruoyi.bid.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.bid.domain.TenderProject;
 import org.apache.ibatis.annotations.Param;
 
@@ -63,4 +65,6 @@ public interface TenderProjectMapper
     List<TenderProject> selectTenderProjectByProjId( Long[] projId);
 
     TenderProject selectTenderProjectByProjIdOne(Long projId);
+
+    List<TenderProject> selectTenderProjectByMap(Map<String, Object> map);
 }

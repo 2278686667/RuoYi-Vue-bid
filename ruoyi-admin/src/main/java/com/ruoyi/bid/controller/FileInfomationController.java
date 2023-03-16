@@ -45,7 +45,13 @@ public class FileInfomationController extends BaseController
         List<FileInfomation> list = fileInfomationService.selectFileInfomationList(fileInfomation);
         return getDataTable(list);
     }
+    @GetMapping("/listEvaluation")
+    public FileInfomation listEvaluation(FileInfomation fileInfomation)
+    {
 
+        FileInfomation fileInfomation1 = fileInfomationService.selectFileInfomationByFileId(fileInfomation.getFileId());
+        return fileInfomation1;
+    }
     /**
      * 导出文件信息列表
      */

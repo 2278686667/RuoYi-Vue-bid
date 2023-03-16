@@ -58,3 +58,20 @@ export function updateSignIn(query) {
     params: query
   })
 }
+// 修改评审专家信息
+export function fileUpload(data) {
+  return request({
+    url: '/system/evaluation_experts_information/fileUpload',
+    method: 'put',
+    data: data
+  })
+}
+
+//发售标书
+export function lssue_of_tenderE(row) {
+  return request({
+    url:'/system/evaluation_experts_information/lssue',
+    method:'put',
+    data:row
+  })
+}

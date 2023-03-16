@@ -1,7 +1,10 @@
 package com.ruoyi.bid.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,9 +99,14 @@ public class TenderProjectServiceImpl implements ITenderProjectService
     @Override
     public List<TenderProject> selectTenderProjectByProjId(Long[] projIds) {
         List<TenderProject> tenderProjectList=null;
-
+        Long userId = SecurityUtils.getUserId();
         if (projIds.length>0){
-            tenderProjectList= tenderProjectMapper.selectTenderProjectByProjId(projIds);
+            Map<String,Object> map=new HashMap<>();
+            map.put("projIds",projIds);
+            map.put("userId",userId);
+
+//            tenderProjectList= tenderProjectMapper.selectTenderProjectByProjId(projIds);
+            tenderProjectList= tenderProjectMapper.selectTenderProjectByMap(map);
         }
 
         return tenderProjectList;

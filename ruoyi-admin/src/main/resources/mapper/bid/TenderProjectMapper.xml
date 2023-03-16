@@ -18,10 +18,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="uploadTime"    column="upload_time"    />
         <result property="status"    column="status"    />
         <result property="remark"    column="remark"    />
+        <result property="bidStatus"    column="bid_status"    />
+        <result property="userId"    column="user_id"    />
     </resultMap>
 
     <sql id="selectTenderProjectVo">
-        select tp_id, bidder_id, proj_id, fiel_id, proj_name, proj_number, purchaser, bidder_company, file_name, upload_by, upload_time, status, remark from tender_project
+        select tp_id, bidder_id, proj_id, fiel_id, proj_name, proj_number, purchaser, bidder_company, file_name, upload_by, upload_time, status, remark,bid_status,user_id from tender_project
     </sql>
 
     <select id="selectTenderProjectList" parameterType="TenderProject" resultMap="TenderProjectResult">
@@ -59,6 +61,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectTenderProjectVo"/>
         where proj_id = #{projId}
     </select>
+    <select id="selectTenderProjectByMap"  resultMap="TenderProjectResult">
+        <include refid="selectTenderProjectVo"/>
+        <if test="projIds!=null">
+            where proj_id in
+            <foreach item="projId" collection="projIds" open="(" separator="," close=")">
+                #{projId}
+            </foreach>
+            and user_id=#{userId}
+        </if>
+    </select>
 
     <insert id="insertTenderProject" parameterType="TenderProject" useGeneratedKeys="true" keyProperty="tpId">
         insert into tender_project
@@ -75,6 +87,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="uploadTime != null">upload_time,</if>
             <if test="status != null">status,</if>
             <if test="remark != null">remark,</if>
+            <if test="bidStatus != null">bid_status,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="bidderId != null">#{bidderId},</if>
@@ -89,6 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="uploadTime != null">#{uploadTime},</if>
             <if test="status != null">#{status},</if>
             <if test="remark != null">#{remark},</if>
+            <if test="bidStatus != null">#{bidStatus},</if>
          </trim>
     </insert>
 

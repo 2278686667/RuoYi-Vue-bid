@@ -193,12 +193,12 @@
       <el-form ref="form" :model="form" :rules="rules">
 
         <el-form-item label="项目名称" label-width="120px">
-          <el-input v-model="form.projName" ></el-input>
+          <el-input v-model="form.projName"  :disabled="true"></el-input>
         </el-form-item>
 
         <el-form-item label="项目编号" label-width="120px">
 
-          <el-input v-model="form.projNumber" ></el-input>
+          <el-input v-model="form.projNumber"  :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="投标公司名称" label-width="120px" >
           <el-input v-model.nmber="form.bidderCompany" autocomplete="off"></el-input>
@@ -346,9 +346,10 @@ export default {
     downloadFile(data){
       if (data.target.innerText==="下载投标文件"&&this.tqwjdata===true){
         console.log("下载投标文件")
-        download.name(this.form.projTender);
+        console.log(this.form)
+        download.resource(this.form.projTender);
       }else if (data.target.innerText==="下载投标文件模板"&&this.tqwjdata===true){
-        download.name(this.form.tendeTemp);
+        download.resource(this.form.tenderTemp);
       }else {
       }
 
@@ -359,7 +360,7 @@ export default {
      */
     toubiao(row){
       this.reset();
-
+      console.log(row)
       const projId = row.projId || this.ids
       getInvite_tenders(projId).then(response => {
         this.form = response.data;

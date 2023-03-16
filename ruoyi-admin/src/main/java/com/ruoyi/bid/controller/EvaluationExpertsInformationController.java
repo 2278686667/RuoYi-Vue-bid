@@ -2,16 +2,12 @@ package com.ruoyi.bid.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.ruoyi.bid.common.vo.EvaluationExpertsInfomationVO;
-import com.ruoyi.bid.domain.BidList;
-import com.ruoyi.bid.domain.EvaluationExpertsInformation;
-import com.ruoyi.bid.domain.FileInfomation;
-import com.ruoyi.bid.domain.TenderProject;
+import com.ruoyi.bid.domain.*;
 import com.ruoyi.bid.service.IBidListService;
 import com.ruoyi.bid.service.IEvaluationExpertsInformationService;
 import com.ruoyi.bid.service.IFileInfomationService;
@@ -19,8 +15,10 @@ import com.ruoyi.bid.service.ITenderProjectService;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.web.controller.common.CommonController;
+import io.swagger.models.auth.In;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -111,8 +109,10 @@ public class EvaluationExpertsInformationController extends BaseController
             vo.setBidderCompany(tenderProject.getBidderCompany());
             vo.setUserId(evaluationExpertsInformation1.getUserId());
             vo.setProjId(tenderProject.getProjId());
+            vo.setIsGroupLeaders(evaluationExpertsInformation1.getIsGroupLeaders());
 
-
+            String status = bidListService.selectBidListByProjId(tenderProject.getProjId()).getStatus();
+            vo.setBidStatus(Integer.valueOf(status));
 
             voList.add(vo);
 
@@ -194,5 +194,52 @@ public class EvaluationExpertsInformationController extends BaseController
         commonController.fileDownload(fileInfomation.getFilePath(),false,response,request);
 
     }
+
+    @Log(title = "提交评审资料")
+    @PutMapping("/fileUpload")
+    @Transactional
+    public AjaxResult fileUpload(@RequestBody Map map){
+
+        Integer fileId = (Integer) map.get("fileId");
+        Integer projId = (Integer) map.get("projId");
+        String tenderTemp = (String) map.get("tenderTemp");
+        Integer reviewId = (Integer) map.get("reviewId");
+        //创建评审文件
+        FileInfomation fileInfomation=fileInfomationService.selectFileInfomationByFileIdAndProjId(fileId.longValue(),projId.longValue());
+        FileInfomation fileInfomationInst=new FileInfomation();
+        fileInfomationInst.setProjId(projId.longValue());
+        fileInfomationInst.setFolderId(fileInfomation.getFolderId());
+        fileInfomationInst.setFileName(tenderTemp);
+        fileInfomationInst.setFilePath(tenderTemp);
+        fileInfomationInst.setCreateBy(SecurityUtils.getUsername());
+        int i = fileInfomationService.insertFileInfomation(fileInfomationInst);
+
+        //修改专家状态
+        EvaluationExpertsInformation evaluationExpertsInformation=new EvaluationExpertsInformation();
+        evaluationExpertsInformation.setReviewId(reviewId.longValue());
+        evaluationExpertsInformation.setStatus("1");
+        int i1 = evaluationExpertsInformationService.updateEvaluationExpertsInformation(evaluationExpertsInformation);
+        if (i>0&&i1>0){
+            return AjaxResult.success();
+        }else {
+            return AjaxResult.error();
+        }
+    }
+
+
+    /**
+     * 项目状态自增
+     */
+    @Log(title = "项目状态自增", businessType = BusinessType.UPDATE)
+    @PutMapping("/lssue")
+    public AjaxResult lssue(@RequestBody EvaluationExpertsInfomationVO vo)
+    {
+        BidList bidList=new BidList();
+        bidList.setProjId(vo.getProjId());
+        bidList.setStatus(vo.getBidStatus()+"");
+        AjaxResult ajaxResult = bidListService.updateByStatus(bidList);
+        return ajaxResult;
+    }
+
 
 }

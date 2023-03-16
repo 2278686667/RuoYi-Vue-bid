@@ -58,4 +58,12 @@ public interface IFileInfomationService
      * @return 结果
      */
     public int deleteFileInfomationByFileId(Long fileId);
+
+    /**
+     * 根据fileid和projid下载文件
+     * @param fileId
+     * @param projId
+     * @return
+     */
+    FileInfomation selectFileInfomationByFileIdAndProjId(Long fileId, Long projId);
 }

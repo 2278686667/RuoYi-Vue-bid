@@ -93,4 +93,10 @@ public class FileInfomationServiceImpl implements IFileInfomationService
     {
         return fileInfomationMapper.deleteFileInfomationByFileId(fileId);
     }
+
+    @Override
+    public FileInfomation selectFileInfomationByFileIdAndProjId(Long fileId, Long projId) {
+        List<FileInfomation> fileInfomationList=fileInfomationMapper.selectFileInfomationByFileIdAndProjId(fileId,projId);
+        return fileInfomationList.get(0);
+    }
 }

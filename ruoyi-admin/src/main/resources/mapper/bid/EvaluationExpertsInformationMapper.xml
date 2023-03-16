@@ -17,10 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"    column="update_time"    />
         <result property="isDeleted"    column="is_deleted"    />
         <result property="remark"    column="remark"    />
+        <result property="isGroupLeaders"    column="is_group_leaders"    />
     </resultMap>
 
     <sql id="selectEvaluationExpertsInformationVo">
-        select review_id, proj_id, user_Id, sign_in, file_id, status, create_by, create_time, update_by, update_time, is_deleted, remark from evaluation_experts_information
+        select review_id, proj_id, user_Id, sign_in, file_id, status, create_by, create_time, update_by, update_time, is_deleted, remark,is_group_leaders from evaluation_experts_information
     </sql>
 
     <select id="selectEvaluationExpertsInformationList" parameterType="EvaluationExpertsInformation" resultMap="EvaluationExpertsInformationResult">
@@ -54,6 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">update_time,</if>
             <if test="isDeleted != null">is_deleted,</if>
             <if test="remark != null">remark,</if>
+            <if test="isGroupLeaders != null">is_group_leaders,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="projId != null">#{projId},</if>
@@ -67,6 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">#{updateTime},</if>
             <if test="isDeleted != null">#{isDeleted},</if>
             <if test="remark != null">#{remark},</if>
+            <if test="isGroupLeaders != null">#{isGroupLeaders},</if>
          </trim>
     </insert>
 

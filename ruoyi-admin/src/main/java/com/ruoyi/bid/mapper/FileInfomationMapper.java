@@ -73,4 +73,7 @@ public interface FileInfomationMapper
      * @return
      */
     List<FileInfomation> selectFileInfomationByFolderIdAndProjId(@Param("folderId") Long folderId,@Param("projId") String projId);
+
+    List<FileInfomation> selectFileInfomationByFileIdAndProjId(@Param("fileId") Long fileId, @Param("projId") Long projId);
+
 }

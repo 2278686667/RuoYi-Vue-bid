@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.ruoyi.bid.domain.FileInfomation;
 import com.ruoyi.bid.domain.FolderStructure;
+import com.ruoyi.bid.domain.TenderProject;
 import com.ruoyi.bid.enums.FolderStructureState;
 import com.ruoyi.bid.mapper.FileInfomationMapper;
 import com.ruoyi.bid.mapper.FolderStructureMapper;
+import com.ruoyi.bid.service.ITenderProjectService;
 import com.ruoyi.common.config.RuoYiConfig;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.utils.DateUtils;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import com.ruoyi.bid.mapper.BidListMapper;
 import com.ruoyi.bid.domain.BidList;
 import com.ruoyi.bid.service.IBidListService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -39,6 +42,9 @@ public class BidListServiceImpl implements IBidListService
 
     @Resource
     private FolderStructureMapper folderStructureMapper;
+
+    @Resource
+    private ITenderProjectService iTenderProjectService;
 
     /**
      * 查询招投标
@@ -155,6 +161,7 @@ public class BidListServiceImpl implements IBidListService
      * @param bidList
      * @return
      */
+    @Transactional
     @Override
     public AjaxResult updateByStatus(BidList bidList) {
 
@@ -166,6 +173,11 @@ public class BidListServiceImpl implements IBidListService
 //            return AjaxResult.error("时间过期了，修改投标截止时间");
 //        }
         bidListMapper.updateByStatus(bidList);
+
+        TenderProject tenderProject=new TenderProject();
+        tenderProject.setBidStatus(bidList.getStatus());
+        tenderProject.setProjId(bidList.getProjId());
+        iTenderProjectService.updateTenderProject(tenderProject);
         return AjaxResult.success("发售成功");
     }
 

@@ -1,7 +1,9 @@
 package com.ruoyi.bid.common;
 
 import com.ruoyi.bid.domain.BidList;
+import com.ruoyi.bid.domain.TenderProject;
 import com.ruoyi.bid.service.IBidListService;
+import com.ruoyi.bid.service.ITenderProjectService;
 import com.ruoyi.common.core.domain.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,6 +17,9 @@ import java.util.List;
 public class ScheduleTest {
     @Autowired
     IBidListService iBidListService;
+
+    @Autowired
+    ITenderProjectService iTenderProjectService;
     //每天晚上触发
 //    @Scheduled(cron = "0/2 * * * * ? ")
     @Scheduled(cron = "0 0 0 * * ? ")
@@ -22,6 +27,12 @@ public class ScheduleTest {
         List<BidList> bidLists = iBidListService.seleValidBidList();
         for (BidList bidList : bidLists) {
             AjaxResult ajaxResult = iBidListService.updateByStatus(bidList);
+
+            //我的投标项目状态同步
+            TenderProject tenderProject=new TenderProject();
+            tenderProject.setBidStatus(bidList.getStatus());
+            tenderProject.setProjId(bidList.getProjId());
+            iTenderProjectService.updateTenderProject(tenderProject);
         }
 
         SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

@@ -51,6 +51,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select file_id, proj_Id, folder_id, file_name, file_path, file_pwd, order_num, status, create_by, create_time, update_by, update_time, is_deleted, remark from file_infomation
         where folder_id = #{folderId} and proj_id=#{projId}
     </select>
+    <select id="selectFileInfomationByFileIdAndProjId" resultMap="FileInfomationResult">
+        select file_id, proj_Id, folder_id, file_name, file_path, file_pwd, order_num, status, create_by, create_time, update_by, update_time, is_deleted, remark from file_infomation
+        where file_id = #{fileId} and proj_id=#{projId}
+    </select>
 
     <insert id="insertFileInfomation" parameterType="FileInfomation" useGeneratedKeys="true" keyProperty="fileId">
         insert into file_infomation
