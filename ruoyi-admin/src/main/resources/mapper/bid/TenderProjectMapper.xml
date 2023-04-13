@@ -88,6 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">status,</if>
             <if test="remark != null">remark,</if>
             <if test="bidStatus != null">bid_status,</if>
+            <if test="userId != null">user_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="bidderId != null">#{bidderId},</if>
@@ -103,6 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="status != null">#{status},</if>
             <if test="remark != null">#{remark},</if>
             <if test="bidStatus != null">#{bidStatus},</if>
+            <if test="userId != null">#{userId},</if>
          </trim>
     </insert>
 

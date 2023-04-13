@@ -6,7 +6,7 @@ import com.ruoyi.bid.domain.FileInfomation;
 /**
  * 文件信息Service接口
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-17
  */
 public interface IFileInfomationService 

@@ -11,7 +11,7 @@ import com.ruoyi.bid.service.IFileInfomationService;
 /**
  * 文件信息Service业务层处理
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-17
  */
 @Service

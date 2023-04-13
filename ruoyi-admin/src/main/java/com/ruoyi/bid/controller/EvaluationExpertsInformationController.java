@@ -37,7 +37,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 评审专家信息Controller
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-23
  */
 @RestController

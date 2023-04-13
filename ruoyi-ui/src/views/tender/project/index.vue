@@ -17,38 +17,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="采购人" prop="purchaser">
-        <el-input
-          v-model="queryParams.purchaser"
-          placeholder="请输入采购人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="投标公司名称" prop="bidderCompany">
-        <el-input
-          v-model="queryParams.bidderCompany"
-          placeholder="请输入投标公司名称"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="文件名称" prop="fileName">
-        <el-input
-          v-model="queryParams.fileName"
-          placeholder="请输入文件名称"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="上传人" prop="uploadBy">
-        <el-input
-          v-model="queryParams.uploadBy"
-          placeholder="请输入上传人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
+
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -138,7 +107,7 @@
       </el-table-column>
       <el-table-column label="备注" align="center" prop="remark">
         <template slot-scope="scope">
-          <p v-html="scope.row.remark"></p>
+<!--          <p v-html="scope.row.remark"></p>-->
         </template>
 
       </el-table-column>

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 文件信息Mapper接口
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-17
  */
 public interface FileInfomationMapper 

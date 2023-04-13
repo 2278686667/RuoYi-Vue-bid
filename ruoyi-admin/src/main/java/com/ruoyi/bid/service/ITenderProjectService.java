@@ -6,7 +6,7 @@ import com.ruoyi.bid.domain.TenderProject;
 /**
  * 投标项目Service接口
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-24
  */
 public interface ITenderProjectService 

@@ -61,6 +61,7 @@ public class EvaluationBidController extends BaseController{
             //如果存在说明已经投标了，移除
             if (collect.contains(list.get(i).getProjId())){
                 list.remove(i);
+                i--;
             }
         }
 

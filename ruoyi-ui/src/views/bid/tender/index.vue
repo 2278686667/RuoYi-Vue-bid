@@ -18,31 +18,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="采购代理机构" prop="purchaserOrg">
-        <el-input
-          v-model="queryParams.purchaserOrg"
-          placeholder="请输入采购代理机构"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="采购人" prop="purchaser">
-        <el-input
-          v-model="queryParams.purchaser"
-          placeholder="请输入采购人"
-          clearable
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
 
-      <el-form-item label="投标截止时间" prop="projEnd">
-        <el-date-picker clearable
-                        v-model="queryParams.projEnd"
-                        type="date"
-                        value-format="yyyy-MM-dd"
-                        placeholder="请选择投标截止时间">
-        </el-date-picker>
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -58,7 +34,8 @@
           size="mini"
           @click="handleAdd"
           v-hasPermi="['bid:invite_tenders:add']"
-        >新增</el-button>
+        >新增
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -69,7 +46,8 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['bid:invite_tenders:edit']"
-        >修改</el-button>
+        >修改
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -80,7 +58,8 @@
           :disabled="multiple"
           @click="handleDelete"
           v-hasPermi="['bid:invite_tenders:remove']"
-        >删除</el-button>
+        >删除
+        </el-button>
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -90,18 +69,19 @@
           size="mini"
           @click="handleExport"
           v-hasPermi="['bid:invite_tenders:export']"
-        >导出</el-button>
+        >导出
+        </el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
     </el-row>
 
     <el-table v-loading="loading" :data="invite_tendersList" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="项目id" align="center" prop="projId" />
-      <el-table-column label="项目名称" align="center" prop="projName" />
-      <el-table-column label="招标编号" align="center" prop="projNumber" />
-      <el-table-column label="采购代理机构" align="center" prop="purchaserOrg" />
-      <el-table-column label="采购人" align="center" prop="purchaser" />
+      <el-table-column type="selection" width="55" align="center"/>
+      <el-table-column label="项目id" align="center" prop="projId"/>
+      <el-table-column label="项目名称" align="center" prop="projName"/>
+      <el-table-column label="招标编号" align="center" prop="projNumber"/>
+      <el-table-column label="采购代理机构" align="center" prop="purchaserOrg"/>
+      <el-table-column label="采购人" align="center" prop="purchaser"/>
       <el-table-column label="投标截止时间" align="center" prop="projEnd" width="180">
         <template slot-scope="scope">
           <span>{{ parseTime(scope.row.projEnd, '{y}-{m}-{d}') }}</span>
@@ -121,10 +101,12 @@
 
       </el-table-column>
 
-      <el-table-column label="备注" align="center" >
+      <el-table-column label="项目详细信息" align="center">
         <template slot-scope="scope">
-          <p v-html="scope.row.remark"></p>
+          <el-button size="mini" @click="details_page(scope.row)">详情页面</el-button>
+          <!--          <p v-html="scope.row.remark"></p>-->
         </template>
+        <!--        <router-link to="/bid/bid/detailsPage/index.vue">详细信息</router-link>-->
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -150,16 +132,16 @@
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="项目名称" prop="projName">
-          <el-input v-model="form.projName" placeholder="请输入项目名称" />
+          <el-input v-model="form.projName" placeholder="请输入项目名称"/>
         </el-form-item>
         <el-form-item label="招标编号" prop="projNumber">
-          <el-input v-model="form.projNumber" placeholder="请输入招标编号" />
+          <el-input v-model="form.projNumber" placeholder="请输入招标编号"/>
         </el-form-item>
         <el-form-item label="采购代理机构" prop="purchaserOrg">
-          <el-input v-model="form.purchaserOrg" placeholder="请输入采购代理机构" />
+          <el-input v-model="form.purchaserOrg" placeholder="请输入采购代理机构"/>
         </el-form-item>
         <el-form-item label="采购人" prop="purchaser">
-          <el-input v-model="form.purchaser" placeholder="请输入采购人" />
+          <el-input v-model="form.purchaser" placeholder="请输入采购人"/>
         </el-form-item>
         <el-form-item label="招标文件">
           <file-upload v-model="form.projTender"/>
@@ -168,7 +150,7 @@
           <file-upload v-model="form.tenderTemp"/>
         </el-form-item>
         <el-form-item label="提取码" prop="projPwd">
-          <el-input v-model="form.projPwd" placeholder="请输入提取码" />
+          <el-input v-model="form.projPwd" placeholder="请输入提取码"/>
         </el-form-item>
         <el-form-item label="投标截止时间" prop="projEnd">
           <el-date-picker clearable
@@ -193,32 +175,32 @@
       <el-form ref="form" :model="form" :rules="rules">
 
         <el-form-item label="项目名称" label-width="120px">
-          <el-input v-model="form.projName"  :disabled="true"></el-input>
+          <el-input v-model="form.projName" :disabled="true"></el-input>
         </el-form-item>
 
         <el-form-item label="项目编号" label-width="120px">
 
-          <el-input v-model="form.projNumber"  :disabled="true"></el-input>
+          <el-input v-model="form.projNumber" :disabled="true"></el-input>
         </el-form-item>
-        <el-form-item label="投标公司名称" label-width="120px" >
+        <el-form-item label="投标公司名称" label-width="120px">
           <el-input v-model.nmber="form.bidderCompany" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="招标文件提取码" label-width="120px" >
+        <el-form-item label="招标文件提取码" label-width="120px">
           <el-input v-model="form.projPwd" type="password" autocomplete="off"></el-input>
-          <el-button  @click="tqwj($event)" style="margin-top: 10px">提取文件</el-button>
+          <el-button @click="tqwj($event)" style="margin-top: 10px">提取文件</el-button>
         </el-form-item>
-        <el-form-item label="招标文件" label-width="120px" >
-            <el-button
-              size="mini"
-              type="text"
-              icon="el-icon-download"
-              @click="downloadFile($event)"
-            >下载投标文件
-            </el-button>
+        <el-form-item label="招标文件" label-width="120px">
+          <el-button
+            size="mini"
+            type="text"
+            icon="el-icon-download"
+            @click="downloadFile($event)"
+          >下载投标文件
+          </el-button>
         </el-form-item>
-        <el-form-item label="招标文件模板" label-width="120px" >
+        <el-form-item label="招标文件模板" label-width="120px">
           <template slot-scope="scope">
-            {{scope.row}}
+            {{ scope.row }}
             <el-button
               size="mini"
               type="text"
@@ -229,7 +211,7 @@
             </el-button>
           </template>
         </el-form-item>
-        <p  style="color: #ff4949;font-size: 16px">
+        <p style="color: #ff4949;font-size: 16px">
           提取文件后请点击"确定"按钮，进行公司投标登记，填写好标书后到"查看我的投标项自中进行文件上传!
         </p>
       </el-form>
@@ -242,7 +224,7 @@
 </template>
 
 <script>
-import { listProject, getProject, delProject, addProject, updateProject } from "@/api/tender/project";
+import {listProject, getProject, delProject, addProject, updateProject} from "@/api/tender/project";
 import {
   listInvite_tenders,
 
@@ -266,8 +248,8 @@ export default {
   name: "Invite_tenders",
   data() {
     return {
-      tqwjdata:false,
-      updateUrl:process.env.VUE_APP_BASE_API+"/bid/invite_tenders/uploadFile",
+      tqwjdata: false,
+      updateUrl: process.env.VUE_APP_BASE_API + "/bid/invite_tenders/uploadFile",
       fileList: [],
       number: 0,
       uploadList: [],
@@ -292,7 +274,7 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
-      toubiaoduihuakuang:false,
+      toubiaoduihuakuang: false,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -314,16 +296,14 @@ export default {
         // createTime: [
         //   { required: true, message: "创建时间不能为空", trigger: "blur" }
         // ],
-        count:[
-          { required: true, message: "请输入投标公司名称", trigger: 'blur' }
+        count: [
+          {required: true, message: "请输入投标公司名称", trigger: 'blur'}
         ],
-        jobName:[
-          { required: true, message: "请输入提取码", trigger: "blur" }
+        jobName: [
+          {required: true, message: "请输入提取码", trigger: "blur"}
         ]
       },
-      rulesping:{
-
-      }
+      rulesping: {}
     };
   },
   created() {
@@ -332,25 +312,34 @@ export default {
 
   },
   methods: {
+    details_page(row) {
+      console.log(row)
+      this.$router.push({
+        path: "/bid/bid/detailsPage/index.vue",
+        query: {id: row.projId}
 
-    tqwj(data){
+      })
+      console.log(this.$route)
+    },
+
+    tqwj(data) {
       // if (data.target.innerText===this.form.projPwd){
       //   this.tqwjdata=true
       // }else {
-        this.tqwjdata=true
-        this.$message.success('提取成功');
-        console.log(this.form)
+      this.tqwjdata = true
+      this.$message.success('提取成功');
+      console.log(this.form)
       // }
     },
     //下載投標文件
-    downloadFile(data){
-      if (data.target.innerText==="下载投标文件"&&this.tqwjdata===true){
+    downloadFile(data) {
+      if (data.target.innerText === "下载投标文件" && this.tqwjdata === true) {
         console.log("下载投标文件")
         console.log(this.form)
         download.resource(this.form.projTender);
-      }else if (data.target.innerText==="下载投标文件模板"&&this.tqwjdata===true){
+      } else if (data.target.innerText === "下载投标文件模板" && this.tqwjdata === true) {
         download.resource(this.form.tenderTemp);
-      }else {
+      } else {
       }
 
     },
@@ -358,7 +347,7 @@ export default {
      * 投标按钮操作
      * @param row
      */
-    toubiao(row){
+    toubiao(row) {
       this.reset();
       console.log(row)
       const projId = row.projId || this.ids
@@ -369,14 +358,17 @@ export default {
 
       });
     },
-    fileClick(){
+    fileClick() {
       console.log("文件柜")
     },
-    sss(){
-      this.fileList.push({name:this.invite_tendersList[0].projTender.substring(this.invite_tendersList[0].projTender.lastIndexOf('/')+1),url:"http://localhost:8080"+this.invite_tendersList[0].projTender})
+    sss() {
+      this.fileList.push({
+        name: this.invite_tendersList[0].projTender.substring(this.invite_tendersList[0].projTender.lastIndexOf('/') + 1),
+        url: "http://localhost:8080" + this.invite_tendersList[0].projTender
+      })
 
     },
-    handlePreview(){
+    handlePreview() {
     },
     /** 查询招投标列表 */
     getList() {
@@ -396,8 +388,8 @@ export default {
       console.log("取消按钮")
     },
     //确定按钮
-    toubiaotj(){
-      addProject(this.form).then(res=>{
+    toubiaotj() {
+      addProject(this.form).then(res => {
         this.$modal.msgSuccess("投标成功");
         this.toubiaoduihuakuang = false;
         this.getList();
@@ -437,7 +429,7 @@ export default {
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.projId)
-      this.single = selection.length!==1
+      this.single = selection.length !== 1
       this.multiple = !selection.length
     },
     /** 新增按钮操作 */
@@ -481,14 +473,15 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const projIds = row.projId || this.ids;
-      this.$modal.confirm('是否确认删除招投标编号为"' + projIds + '"的数据项？').then(function() {
+      this.$modal.confirm('是否确认删除招投标编号为"' + projIds + '"的数据项？').then(function () {
         return delInvite_tenders(projIds);
       }).then(() => {
         this.getList();
         this.$modal.msgSuccess("删除成功");
-      }).catch(() => {});
+      }).catch(() => {
+      });
     },
-    pingbiao(row){
+    pingbiao(row) {
       this.reset();
       const projId = row.projId || this.ids
       getInvite_tenders(projId).then(response => {

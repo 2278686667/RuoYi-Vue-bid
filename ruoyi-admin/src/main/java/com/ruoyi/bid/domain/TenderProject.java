@@ -10,7 +10,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 投标项目对象 tender_project
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-24
  */
 public class TenderProject extends BaseEntity
