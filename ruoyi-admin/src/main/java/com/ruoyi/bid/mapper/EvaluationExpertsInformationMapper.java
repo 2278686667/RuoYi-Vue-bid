@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 评审专家信息Mapper接口
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-23
  */
 public interface EvaluationExpertsInformationMapper 

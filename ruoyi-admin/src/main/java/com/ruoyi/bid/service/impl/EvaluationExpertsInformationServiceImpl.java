@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 /**
  * 评审专家信息Service业务层处理
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-23
  */
 @Service

@@ -8,7 +8,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 文件信息对象 file_infomation
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-17
  */
 public class FileInfomation extends BaseEntity

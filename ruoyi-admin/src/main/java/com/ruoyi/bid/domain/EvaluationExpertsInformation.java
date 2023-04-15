@@ -8,7 +8,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
 /**
  * 评审专家信息对象 evaluation_experts_information
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-23
  */
 public class EvaluationExpertsInformation extends BaseEntity

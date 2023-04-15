@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 投标项目Mapper接口
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-24
  */
 public interface TenderProjectMapper 

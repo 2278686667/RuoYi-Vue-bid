@@ -24,7 +24,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 /**
  * token验证处理
  *
- * @author ruoyi
+ * @author chb
  */
 @Component
 public class TokenService

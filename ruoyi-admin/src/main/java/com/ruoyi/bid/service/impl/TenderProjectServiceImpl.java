@@ -15,7 +15,7 @@ import com.ruoyi.bid.service.ITenderProjectService;
 /**
  * 投标项目Service业务层处理
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-24
  */
 @Service

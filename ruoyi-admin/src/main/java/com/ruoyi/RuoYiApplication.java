@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * 启动程序
  * 
- * @author ruoyi
+ * @author chb
  */
 @EnableScheduling//开启定时任务
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })

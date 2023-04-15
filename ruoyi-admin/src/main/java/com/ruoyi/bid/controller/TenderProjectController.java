@@ -30,7 +30,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 /**
  * 投标项目Controller
  * 
- * @author ruoyi
+ * @author chb
  * @date 2023-02-24
  */
 @RestController
@@ -96,6 +96,7 @@ public class TenderProjectController extends BaseController
         Long deptId = SecurityUtils.getUserId();
         tenderProject.setBidderId(deptId);
         tenderProject.setStatus("0");
+        tenderProject.setUserId(SecurityUtils.getUserId());
         //设置项目状态
         BidList bidList = bidListService.selectBidListByProjId(tenderProject.getProjId());
         tenderProject.setBidStatus(bidList.getStatus());
