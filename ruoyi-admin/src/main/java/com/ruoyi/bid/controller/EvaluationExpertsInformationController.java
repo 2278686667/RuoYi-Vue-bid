@@ -3,6 +3,8 @@ package com.ruoyi.bid.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -204,6 +206,7 @@ public class EvaluationExpertsInformationController extends BaseController
         Integer projId = (Integer) map.get("projId");
         String tenderTemp = (String) map.get("tenderTemp");
         Integer reviewId = (Integer) map.get("reviewId");
+        Integer bidStatus = (Integer) map.get("bidStatus");
         //创建评审文件
         FileInfomation fileInfomation=fileInfomationService.selectFileInfomationByFileIdAndProjId(fileId.longValue(),projId.longValue());
         FileInfomation fileInfomationInst=new FileInfomation();
@@ -217,8 +220,31 @@ public class EvaluationExpertsInformationController extends BaseController
         //修改专家状态
         EvaluationExpertsInformation evaluationExpertsInformation=new EvaluationExpertsInformation();
         evaluationExpertsInformation.setReviewId(reviewId.longValue());
-        evaluationExpertsInformation.setStatus("1");
+        evaluationExpertsInformation.setStatus("2");
         int i1 = evaluationExpertsInformationService.updateEvaluationExpertsInformation(evaluationExpertsInformation);
+
+        //判断是否评审完成，如果完成bidlist中status变为5
+        EvaluationExpertsInformation evaluationExpertsInformationbyProj_Id=new EvaluationExpertsInformation();
+        evaluationExpertsInformationbyProj_Id.setProjId(projId.longValue());
+        List<EvaluationExpertsInformation> evaluationExpertsInformationsbyProjId = evaluationExpertsInformationService.selectEvaluationExpertsInformationList(evaluationExpertsInformationbyProj_Id);
+        List<String> collect = evaluationExpertsInformationsbyProjId.stream().map(new Function<EvaluationExpertsInformation, String>() {
+            @Override
+            public String apply(EvaluationExpertsInformation evaluationExpertsInformation1) {
+                int i=0;
+                if(evaluationExpertsInformation1.getStatus().equals(2)){
+                    i++;
+                }
+                return i+"";
+            }
+        }).collect(Collectors.toList());
+        int size = collect.size();
+        if (evaluationExpertsInformationsbyProjId.size()==size){
+            BidList bidList=new BidList();
+            bidList.setProjId(projId.longValue());
+            bidList.setStatus(bidStatus.toString());
+            bidListService.updateByStatus(bidList);
+        }
+
         if (i>0&&i1>0){
             return AjaxResult.success();
         }else {

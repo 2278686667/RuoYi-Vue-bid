@@ -59,6 +59,11 @@ public class TenderProjectController extends BaseController
         startPage();
         tenderProject.setBidderId(SecurityUtils.getUserId());
         List<TenderProject> list = tenderProjectService.selectTenderProjectList(tenderProject);
+        for (TenderProject project : list) {
+            Long projId = project.getProjId();
+            BidList bidList = bidListService.selectBidListByProjId(projId);
+            project.setBidStatus(bidList.getStatus());
+        }
         return getDataTable(list);
     }
 

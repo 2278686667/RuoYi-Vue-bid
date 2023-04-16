@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 10/04/2023 23:32:04
+ Date: 16/04/2023 19:54:21
 */
 
 SET NAMES utf8mb4;
@@ -38,14 +38,14 @@ CREATE TABLE `bid_list`  (
   `update_time` timestamp(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`proj_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '招标项目信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '招标项目信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bid_list
 -- ----------------------------
 INSERT INTO `bid_list` VALUES (1, '保定学院本级实验实训中心基础设施建设一期（实验室通用教学设备设施）', 'BDGK2022033', '保定市公共资源交易中心（全额）', '保定学院本级', '/profile/upload/2022/11/27/1_附3开题报告_20221127144504A002.doc', '/profile/upload/2022/11/27/学校集中采购流程图_20221127231819A006.doc', '123', '2023-03-31 00:00:00', '1', NULL, '2022-11-27 11:03:08', NULL, '2022-11-27 23:18:21', '<ol><li><strong>123</strong></li><li><strong>345</strong></li></ol>');
 INSERT INTO `bid_list` VALUES (23, '保定学院学生宿舍空调运营合作项目', 'I1301000075048838001', '河北元兴项目咨询管理有限公司', '王菲菲', '/profile/upload/2023/03/14/高校招投标管理系统的设计与实现-曹浩博_20230314165055A003.doc', '/profile/upload/2023/03/14/关于高校招投标管理系统的设计与实现的文献综述_20230314165059A004.doc', 'zzz', '2023-03-15 00:00:00', '4', NULL, '2023-03-14 16:51:20', NULL, NULL, '<h1 class=\"ql-align-center\">保定学院学生宿舍空调运营合作项目招标公告</h1><p><br></p>');
-INSERT INTO `bid_list` VALUES (24, '保定学院现代实训中心室外硬化工程', 'I1301000075041515001', '	河北德众工程项目管理有限公司', '王光锋', '/profile/upload/2023/03/14/关于高校招投标管理系统的设计与实现的文献综述_20230314190646A001.doc', '/profile/upload/2023/03/14/高校招投标管理系统的设计与实现-曹浩博_20230314190652A002.doc', 'zyx', '2023-03-16 00:00:00', '4', NULL, '2023-03-14 19:07:15', NULL, '2023-03-14 19:07:34', '<p class=\"ql-align-center\"><strong>保定学院现代实训中心室外硬化工程招标公告</strong></p>');
+INSERT INTO `bid_list` VALUES (24, '保定学院现代实训中心室外硬化工程', 'I1301000075041515001', '	河北德众工程项目管理有限公司', '王光锋', '/profile/upload/2023/03/14/关于高校招投标管理系统的设计与实现的文献综述_20230314190646A001.doc', '/profile/upload/2023/03/14/高校招投标管理系统的设计与实现-曹浩博_20230314190652A002.doc', 'zyx', '2023-03-16 00:00:00', '5', NULL, '2023-03-14 19:07:15', NULL, '2023-03-14 19:07:34', '<p class=\"ql-align-center\"><strong>保定学院现代实训中心室外硬化工程招标公告</strong></p>');
 
 -- ----------------------------
 -- Table structure for evaluation_experts_information
@@ -67,15 +67,15 @@ CREATE TABLE `evaluation_experts_information`  (
   `bid_status` int(0) NULL DEFAULT 0 COMMENT '项目状态',
   `is_group_leaders` char(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '0' COMMENT '0表示普通专家 1表示评审组长',
   PRIMARY KEY (`review_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '评审专家信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '评审专家信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of evaluation_experts_information
 -- ----------------------------
-INSERT INTO `evaluation_experts_information` VALUES (51, 24, 107, '0', 118, '0', 'admin', '2023-03-14 19:12:42', NULL, '2023-03-14 19:12:41', 0, NULL, 0, '0');
-INSERT INTO `evaluation_experts_information` VALUES (52, 24, 108, '1', 117, '1', 'admin', '2023-03-14 19:12:42', NULL, '2023-03-14 19:18:26', 0, NULL, 0, '1');
-INSERT INTO `evaluation_experts_information` VALUES (53, 23, 107, '0', 121, '0', 'admin', '2023-03-14 19:52:27', NULL, '2023-03-14 19:52:27', 0, NULL, 0, '1');
-INSERT INTO `evaluation_experts_information` VALUES (54, 23, 108, '1', 114, '0', 'admin', '2023-03-14 19:52:27', NULL, '2023-03-14 19:52:51', 0, NULL, 0, '0');
+INSERT INTO `evaluation_experts_information` VALUES (51, 24, 107, '1', 117, '2', 'admin', '2023-03-14 19:12:42', NULL, '2023-04-15 17:26:46', 0, NULL, 0, '0');
+INSERT INTO `evaluation_experts_information` VALUES (52, 24, 108, '1', 117, '2', 'admin', '2023-03-14 19:12:42', NULL, '2023-04-15 17:57:30', 0, NULL, 0, '1');
+INSERT INTO `evaluation_experts_information` VALUES (53, 23, 107, '1', 114, '0', 'admin', '2023-03-14 19:52:27', NULL, '2023-04-15 17:21:59', 0, NULL, 0, '1');
+INSERT INTO `evaluation_experts_information` VALUES (54, 23, 108, '1', 114, '0', 'admin', '2023-03-14 19:52:27', NULL, '2023-04-15 17:22:01', 0, NULL, 0, '0');
 
 -- ----------------------------
 -- Table structure for file_infomation
@@ -97,7 +97,7 @@ CREATE TABLE `file_infomation`  (
   `is_deleted` tinyint(0) NOT NULL DEFAULT 0 COMMENT '是否删除(0-未删, 1-已删)',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`file_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 121 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '文件信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '文件信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of file_infomation
@@ -112,6 +112,16 @@ INSERT INTO `file_infomation` VALUES (118, 24, 94, '/profile/upload/2023/03/14/�
 INSERT INTO `file_infomation` VALUES (119, 24, 92, '/profile/upload/2023/03/14/投标文件货物类政府采购竞争性谈判文件标准文本_20230314191806A008.doc', '/profile/upload/2023/03/14/投标文件货物类政府采购竞争性谈判文件标准文本_20230314191806A008.doc', NULL, NULL, NULL, '赵六', '2023-03-14 19:18:08', NULL, '2023-03-14 19:18:07', 0, NULL);
 INSERT INTO `file_infomation` VALUES (120, 24, 92, '/profile/upload/2023/03/14/曹_20230314191825A009.doc', '/profile/upload/2023/03/14/曹_20230314191825A009.doc', NULL, NULL, NULL, '赵六', '2023-03-14 19:18:26', NULL, '2023-03-14 19:18:26', 0, NULL);
 INSERT INTO `file_infomation` VALUES (121, 23, 96, '/profile/upload/2023/03/14/关于高校招投标管理系统的设计与实现的文献综述_20230314195226A010.doc', NULL, NULL, NULL, NULL, 'admin', '2023-03-14 19:52:27', NULL, '2023-03-14 19:52:27', 0, NULL);
+INSERT INTO `file_infomation` VALUES (122, 24, 92, '/profile/upload/2023/04/15/曹_20230415170703A001.doc', '/profile/upload/2023/04/15/曹_20230415170703A001.doc', NULL, NULL, NULL, '王五', '2023-04-15 17:07:04', NULL, '2023-04-15 17:07:03', 0, NULL);
+INSERT INTO `file_infomation` VALUES (123, 24, 92, '/profile/upload/2023/04/15/曹_20230415170828A002.doc', '/profile/upload/2023/04/15/曹_20230415170828A002.doc', NULL, NULL, NULL, '赵六', '2023-04-15 17:08:29', NULL, '2023-04-15 17:08:29', 0, NULL);
+INSERT INTO `file_infomation` VALUES (124, 23, 90, '/profile/upload/2023/04/15/曹_20230415170916A003.doc', '/profile/upload/2023/04/15/曹_20230415170916A003.doc', NULL, NULL, NULL, '赵六', '2023-04-15 17:09:18', NULL, '2023-04-15 17:09:18', 0, NULL);
+INSERT INTO `file_infomation` VALUES (125, 23, 90, '/profile/upload/2023/04/15/曹_20230415171137A004.doc', '/profile/upload/2023/04/15/曹_20230415171137A004.doc', NULL, NULL, NULL, '王五', '2023-04-15 17:11:38', NULL, '2023-04-15 17:11:38', 0, NULL);
+INSERT INTO `file_infomation` VALUES (126, 24, 92, '/profile/upload/2023/04/15/曹_20230415172530A001.doc', '/profile/upload/2023/04/15/曹_20230415172530A001.doc', NULL, NULL, NULL, '王五', '2023-04-15 17:25:31', NULL, '2023-04-15 17:25:31', 0, NULL);
+INSERT INTO `file_infomation` VALUES (127, 24, 92, '/profile/upload/2023/04/15/曹_20230415172644A001.doc', '/profile/upload/2023/04/15/曹_20230415172644A001.doc', NULL, NULL, NULL, '王五', '2023-04-15 17:26:46', NULL, '2023-04-15 17:26:45', 0, NULL);
+INSERT INTO `file_infomation` VALUES (128, 24, 92, '/profile/upload/2023/04/15/曹_20230415172802A002.doc', '/profile/upload/2023/04/15/曹_20230415172802A002.doc', NULL, NULL, NULL, '赵六', '2023-04-15 17:28:04', NULL, '2023-04-15 17:28:04', 0, NULL);
+INSERT INTO `file_infomation` VALUES (129, 24, 92, '/profile/upload/2023/04/15/曹_20230415174937A001.doc', '/profile/upload/2023/04/15/曹_20230415174937A001.doc', NULL, NULL, NULL, '赵六', '2023-04-15 17:49:38', NULL, '2023-04-15 17:49:38', 0, NULL);
+INSERT INTO `file_infomation` VALUES (130, 24, 92, '/profile/upload/2023/04/15/投标文件货物类政府采购竞争性谈判文件标准文本_20230415175208A002.doc', '/profile/upload/2023/04/15/投标文件货物类政府采购竞争性谈判文件标准文本_20230415175208A002.doc', NULL, NULL, NULL, '赵六', '2023-04-15 17:52:09', NULL, '2023-04-15 17:52:09', 0, NULL);
+INSERT INTO `file_infomation` VALUES (131, 24, 92, '/profile/upload/2023/04/15/曹_20230415175725A001.doc', '/profile/upload/2023/04/15/曹_20230415175725A001.doc', NULL, NULL, NULL, '赵六', '2023-04-15 17:57:30', NULL, '2023-04-15 17:57:30', 0, NULL);
 
 -- ----------------------------
 -- Table structure for folder_structure
@@ -130,7 +140,7 @@ CREATE TABLE `folder_structure`  (
   `is_deleted` tinyint(0) NOT NULL DEFAULT 0 COMMENT '是否删除(0-未删, 1-已删)',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`folder_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 96 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '文件夹结构信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 97 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '文件夹结构信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of folder_structure
@@ -168,7 +178,7 @@ CREATE TABLE `gen_table`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`table_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '代码生成业务表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table
@@ -179,6 +189,7 @@ INSERT INTO `gen_table` VALUES (4, 'file_infomation', '文件信息表', '', '',
 INSERT INTO `gen_table` VALUES (5, 'tender_infomation', '投标用户信息表', NULL, NULL, 'TenderInfomation', 'crud', 'com.ruoyi.bid', 'system', 'infomation', '投标用户信息', 'chb', '0', '/', '{}', 'admin', '2023-02-23 10:17:07', '', '2023-02-23 10:18:04', NULL);
 INSERT INTO `gen_table` VALUES (6, 'evaluation_experts_information', '评审专家信息表', NULL, NULL, 'EvaluationExpertsInformation', 'crud', 'com.ruoyi.bid', 'system', 'evaluation_experts_information', '评审专家信息', 'ruoyi', '0', '/', '{}', 'admin', '2023-02-23 10:38:31', '', '2023-02-23 10:55:33', NULL);
 INSERT INTO `gen_table` VALUES (7, 'tender_project', '投标项目表', NULL, NULL, 'TenderProject', 'crud', 'com.ruoyi.bid', 'tender', 'project', '投标项目', 'ruoyi', '0', '/', '{\"parentMenuId\":2029}', 'admin', '2023-02-24 14:49:41', '', '2023-02-24 14:50:56', NULL);
+INSERT INTO `gen_table` VALUES (9, 'mark_sheet', '评分表', NULL, NULL, 'MarkSheet', 'crud', 'com.ruoyi.bid', 'sheet', 'sheet', '评分表', 'chb', '0', '/', '{\"parentMenuId\":2027}', 'admin', '2023-04-15 16:11:07', '', '2023-04-15 16:12:27', NULL);
 
 -- ----------------------------
 -- Table structure for gen_table_column
@@ -208,7 +219,7 @@ CREATE TABLE `gen_table_column`  (
   `update_by` varchar(64) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '更新者',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`column_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 91 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 106 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '代码生成业务表字段' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of gen_table_column
@@ -290,6 +301,40 @@ INSERT INTO `gen_table_column` VALUES (88, '7', 'upload_by', '上传人', 'varch
 INSERT INTO `gen_table_column` VALUES (89, '7', 'upload_time', '上传时间', 'datetime', 'Date', 'uploadTime', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'datetime', '', 11, 'admin', '2023-02-24 14:49:41', '', '2023-02-24 14:50:56');
 INSERT INTO `gen_table_column` VALUES (90, '7', 'status', '文件状态（0未上传 1已上传）', 'char(1)', 'String', 'status', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'radio', '', 12, 'admin', '2023-02-24 14:49:41', '', '2023-02-24 14:50:56');
 INSERT INTO `gen_table_column` VALUES (91, '7', 'remark', '备注', 'varchar(500)', 'String', 'remark', '0', '0', NULL, '1', '1', '1', NULL, 'EQ', 'textarea', '', 13, 'admin', '2023-02-24 14:49:41', '', '2023-02-24 14:50:56');
+INSERT INTO `gen_table_column` VALUES (99, '9', 'id', NULL, 'int', 'Long', 'id', '1', '0', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2023-04-15 16:11:07', '', '2023-04-15 16:12:27');
+INSERT INTO `gen_table_column` VALUES (100, '9', 'price', '价格因素', 'decimal(10,2)', 'BigDecimal', 'price', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2023-04-15 16:11:07', '', '2023-04-15 16:12:27');
+INSERT INTO `gen_table_column` VALUES (101, '9', 'business', '商务因素', 'decimal(10,2)', 'BigDecimal', 'business', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2023-04-15 16:11:07', '', '2023-04-15 16:12:27');
+INSERT INTO `gen_table_column` VALUES (102, '9', 'techology', '技术因素', 'decimal(10,2)', 'BigDecimal', 'techology', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2023-04-15 16:11:07', '', '2023-04-15 16:12:27');
+INSERT INTO `gen_table_column` VALUES (103, '9', 'after', '售后服务', 'decimal(10,2)', 'BigDecimal', 'after', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2023-04-15 16:11:07', '', '2023-04-15 16:12:27');
+INSERT INTO `gen_table_column` VALUES (104, '9', 'proj_Id', '项目id', 'int', 'Long', 'projId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2023-04-15 16:11:07', '', '2023-04-15 16:12:27');
+INSERT INTO `gen_table_column` VALUES (105, '9', 'review_id', '专家', 'int', 'Long', 'reviewId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2023-04-15 16:11:07', '', '2023-04-15 16:12:27');
+
+-- ----------------------------
+-- Table structure for mark_sheet
+-- ----------------------------
+DROP TABLE IF EXISTS `mark_sheet`;
+CREATE TABLE `mark_sheet`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `price` decimal(10, 2) NULL DEFAULT NULL COMMENT '价格因素',
+  `business` decimal(10, 2) NULL DEFAULT NULL COMMENT '商务因素',
+  `techology` decimal(10, 2) NULL DEFAULT NULL COMMENT '技术因素',
+  `after` decimal(10, 2) NULL DEFAULT NULL COMMENT '售后服务',
+  `proj_Id` int(0) NULL DEFAULT NULL COMMENT '项目id',
+  `review_id` int(0) NULL DEFAULT NULL COMMENT '专家',
+  `total` decimal(10, 2) NULL DEFAULT NULL COMMENT '总分',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mark_sheet
+-- ----------------------------
+INSERT INTO `mark_sheet` VALUES (4, 1.00, 1.00, 1.00, 1.00, 24, 51, NULL);
+INSERT INTO `mark_sheet` VALUES (5, 2.00, 2.00, 2.00, 2.00, 24, 51, 2.50);
+INSERT INTO `mark_sheet` VALUES (6, 2.00, 2.00, 2.00, 2.00, 24, 51, 10.00);
+INSERT INTO `mark_sheet` VALUES (7, 5.00, 5.00, 5.00, 5.00, 23, 54, 5.00);
+INSERT INTO `mark_sheet` VALUES (8, 5.00, 5.00, 5.00, 5.00, 23, 53, 5.00);
+INSERT INTO `mark_sheet` VALUES (9, 1.00, 1.00, 1.00, 1.00, 24, 51, 1.00);
+INSERT INTO `mark_sheet` VALUES (10, 5.00, 5.00, 5.00, 5.00, 24, 52, 5.00);
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -721,7 +766,7 @@ CREATE TABLE `sys_logininfor`  (
   `msg` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '提示消息',
   `login_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 461 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 478 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '系统访问记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_logininfor
@@ -1088,6 +1133,22 @@ INSERT INTO `sys_logininfor` VALUES (458, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (459, 'admin', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-03-17 08:42:41');
 INSERT INTO `sys_logininfor` VALUES (460, 'admin', '127.0.0.1', '内网IP', 'Chrome 10', 'Windows 10', '0', '登录成功', '2023-03-17 09:21:16');
 INSERT INTO `sys_logininfor` VALUES (461, 'admin', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-03-26 17:26:25');
+INSERT INTO `sys_logininfor` VALUES (462, 'admin', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 10:36:37');
+INSERT INTO `sys_logininfor` VALUES (463, 'admin', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-04-15 10:43:00');
+INSERT INTO `sys_logininfor` VALUES (464, 'admin', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 10:43:10');
+INSERT INTO `sys_logininfor` VALUES (465, 'admin', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 10:58:02');
+INSERT INTO `sys_logininfor` VALUES (466, 'admin', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-04-15 10:59:44');
+INSERT INTO `sys_logininfor` VALUES (467, '赵六', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 10:59:54');
+INSERT INTO `sys_logininfor` VALUES (468, '王五', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 16:35:48');
+INSERT INTO `sys_logininfor` VALUES (469, '王五', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-04-15 17:07:47');
+INSERT INTO `sys_logininfor` VALUES (470, '赵六', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 17:07:58');
+INSERT INTO `sys_logininfor` VALUES (471, '赵六', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-04-15 17:09:30');
+INSERT INTO `sys_logininfor` VALUES (472, '赵六', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 17:09:44');
+INSERT INTO `sys_logininfor` VALUES (473, '赵六', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-04-15 17:09:52');
+INSERT INTO `sys_logininfor` VALUES (474, '王五', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 17:10:01');
+INSERT INTO `sys_logininfor` VALUES (475, '王五', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '退出成功', '2023-04-15 17:27:10');
+INSERT INTO `sys_logininfor` VALUES (476, '赵六', '127.0.0.1', '内网IP', 'Chrome 11', 'Windows 10', '0', '登录成功', '2023-04-15 17:27:19');
+INSERT INTO `sys_logininfor` VALUES (477, '李四', '127.0.0.1', '内网IP', 'Firefox 11', 'Windows 10', '0', '登录成功', '2023-04-15 17:59:58');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1114,14 +1175,14 @@ CREATE TABLE `sys_menu`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2038 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2043 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '菜单权限表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 1, 'system', NULL, '', 1, 0, 'M', '0', '0', '', 'system', 'admin', '2022-11-03 13:30:03', '', NULL, '系统管理目录');
 INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 2, 'monitor', NULL, '', 1, 0, 'M', '1', '0', '', 'monitor', 'admin', '2022-11-03 13:30:03', 'admin', '2023-03-01 16:23:42', '系统监控目录');
-INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 3, 'tool', NULL, '', 1, 0, 'M', '1', '0', '', 'tool', 'admin', '2022-11-03 13:30:03', 'admin', '2023-03-01 16:23:34', '系统工具目录');
+INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 3, 'tool', NULL, '', 1, 0, 'M', '0', '0', '', 'tool', 'admin', '2022-11-03 13:30:03', 'admin', '2023-04-15 16:09:28', '系统工具目录');
 INSERT INTO `sys_menu` VALUES (4, '官网', 0, 4, 'http://ruoyi.vip', NULL, '', 0, 0, 'M', '1', '1', '', 'guide', 'admin', '2022-11-03 13:30:03', 'admin', '2023-03-14 16:26:34', '若依官网地址');
 INSERT INTO `sys_menu` VALUES (100, '用户管理', 1, 1, 'user', 'system/user/index', '', 1, 0, 'C', '0', '0', 'system:user:list', 'user', 'admin', '2022-11-03 13:30:03', '', NULL, '用户管理菜单');
 INSERT INTO `sys_menu` VALUES (101, '角色管理', 1, 2, 'role', 'system/role/index', '', 1, 0, 'C', '0', '0', 'system:role:list', 'peoples', 'admin', '2022-11-03 13:30:03', '', NULL, '角色管理菜单');
@@ -1211,7 +1272,7 @@ INSERT INTO `sys_menu` VALUES (2010, '招投标新增', 2008, 2, '#', '', NULL, 
 INSERT INTO `sys_menu` VALUES (2011, '招投标修改', 2008, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'bid:invite_tenders:edit', '#', 'admin', '2022-11-27 14:34:04', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2012, '招投标删除', 2008, 4, '#', '', NULL, 1, 0, 'F', '0', '0', 'bid:invite_tenders:remove', '#', 'admin', '2022-11-27 14:34:04', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2013, '招投标导出', 2008, 5, '#', '', NULL, 1, 0, 'F', '0', '0', 'bid:invite_tenders:export', '#', 'admin', '2022-11-27 14:34:04', '', NULL, '');
-INSERT INTO `sys_menu` VALUES (2014, '文件夹结构信息', 2000, 1, 'folder', 'folder/folder/index', NULL, 1, 1, 'C', '0', '0', 'folder:folder:list', 'checkbox', 'admin', '2023-01-31 15:57:52', 'admin', '2023-02-27 16:06:13', '文件夹结构信息菜单');
+INSERT INTO `sys_menu` VALUES (2014, '文件夹结构信息', 2000, 1, 'folder', 'folder/folder/index', NULL, 1, 1, 'C', '1', '0', 'folder:folder:list', 'checkbox', 'admin', '2023-01-31 15:57:52', 'admin', '2023-04-15 10:45:03', '文件夹结构信息菜单');
 INSERT INTO `sys_menu` VALUES (2015, '文件夹结构信息查询', 2014, 1, '#', '', NULL, 1, 0, 'F', '0', '0', 'folder:folder:query', '#', 'admin', '2023-01-31 15:57:52', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2016, '文件夹结构信息新增', 2014, 2, '#', '', NULL, 1, 0, 'F', '0', '0', 'folder:folder:add', '#', 'admin', '2023-01-31 15:57:52', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2017, '文件夹结构信息修改', 2014, 3, '#', '', NULL, 1, 0, 'F', '0', '0', 'folder:folder:edit', '#', 'admin', '2023-01-31 15:57:52', '', NULL, '');
@@ -1229,6 +1290,10 @@ INSERT INTO `sys_menu` VALUES (2035, '投标项目导出', 2030, 5, '#', '', NUL
 INSERT INTO `sys_menu` VALUES (2036, '我的评审项目', 2027, 1, 'information', 'system/evaluation_experts_information/index', NULL, 1, 1, 'C', '0', '0', 'system:information:list', 'guide', 'admin', '2023-02-28 09:43:37', 'admin', '2023-02-28 10:03:20', '');
 INSERT INTO `sys_menu` VALUES (2037, '测试', 0, 8, 'ceshi', NULL, NULL, 1, 0, 'M', '0', '0', NULL, '404', 'admin', '2023-03-15 11:20:35', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2038, '视频', 2037, 1, 'shipin', 'test/shipin/index', NULL, 1, 1, 'C', '0', '0', NULL, 'bug', 'admin', '2023-03-15 11:21:05', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2039, '详情', 2000, 4, 'bid/detailsPage/index.vue', 'bid/detailsPage/index.vue', NULL, 1, 0, 'C', '1', '0', '', '#', 'admin', '2023-04-15 10:40:43', 'admin', '2023-04-15 10:44:59', '');
+INSERT INTO `sys_menu` VALUES (2040, '项目状态', 2008, 5, 'bid/projStatus/index.vue', 'bid/projStatus/index.vue', NULL, 1, 0, 'C', '0', '0', NULL, '#', 'admin', '2023-04-15 10:42:21', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2041, '项目状态', 2000, 5, 'bid/projStatus/index.vue', 'bid/projStatus/index.vue', NULL, 1, 0, 'C', '1', '0', '', '#', 'admin', '2023-04-15 10:44:25', 'admin', '2023-04-15 10:45:08', '');
+INSERT INTO `sys_menu` VALUES (2042, '评分', 2027, 2, 'system/mark_sheet/index.vue', 'system/mark_sheet/index.vue', NULL, 1, 0, 'C', '0', '0', '', '#', 'admin', '2023-04-15 11:02:55', 'admin', '2023-04-15 11:03:00', '');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -1246,7 +1311,7 @@ CREATE TABLE `sys_notice`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '通知公告表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_notice
@@ -1277,7 +1342,7 @@ CREATE TABLE `sys_oper_log`  (
   `error_msg` varchar(2000) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 565 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 612 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_oper_log
@@ -1748,6 +1813,52 @@ INSERT INTO `sys_oper_log` VALUES (562, '菜单管理', 1, 'com.ruoyi.web.contro
 INSERT INTO `sys_oper_log` VALUES (563, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.edit()', 'PUT', 1, 'admin', NULL, '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"avatar\":\"\",\"createBy\":\"\",\"createTime\":\"2023-03-12 18:28:39\",\"delFlag\":\"0\",\"email\":\"\",\"loginDate\":\"2023-03-12 18:30:08\",\"loginIp\":\"127.0.0.1\",\"nickName\":\"曹浩博\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"roleIds\":[100],\"roles\":[{\"admin\":false,\"dataScope\":\"1\",\"deptCheckStrictly\":false,\"flag\":false,\"menuCheckStrictly\":false,\"params\":{},\"roleId\":100,\"roleKey\":\"zhaobiao\",\"roleName\":\"招标用户\",\"roleSort\":\"3\",\"status\":\"0\"}],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":109,\"userName\":\"曹浩博\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-03-16 12:35:49');
 INSERT INTO `sys_oper_log` VALUES (564, '用户管理', 2, 'com.ruoyi.web.controller.system.SysUserController.edit()', 'PUT', 1, 'admin', NULL, '/system/user', '127.0.0.1', '内网IP', '{\"admin\":false,\"avatar\":\"\",\"createBy\":\"\",\"createTime\":\"2023-03-12 18:28:39\",\"delFlag\":\"0\",\"email\":\"\",\"loginDate\":\"2023-03-12 18:30:08\",\"loginIp\":\"127.0.0.1\",\"nickName\":\"曹浩博\",\"params\":{},\"phonenumber\":\"\",\"postIds\":[],\"roleIds\":[100],\"roles\":[{\"admin\":false,\"dataScope\":\"1\",\"deptCheckStrictly\":false,\"flag\":false,\"menuCheckStrictly\":false,\"params\":{},\"roleId\":100,\"roleKey\":\"zhaobiao\",\"roleName\":\"招标用户\",\"roleSort\":\"3\",\"status\":\"0\"}],\"sex\":\"0\",\"status\":\"0\",\"updateBy\":\"admin\",\"userId\":109,\"userName\":\"曹浩博\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-03-16 17:06:38');
 INSERT INTO `sys_oper_log` VALUES (565, '招投标', 2, 'com.ruoyi.bid.controller.BidListController.lssue()', 'PUT', 1, 'admin', NULL, '/bid/invite_tenders/lssue', '127.0.0.1', '内网IP', '{\"createTime\":\"2022-11-27 11:03:08\",\"params\":{},\"projEnd\":\"2023-03-31 00:00:00\",\"projId\":1,\"projName\":\"保定学院本级实验实训中心基础设施建设一期（实验室通用教学设备设施）\",\"projNumber\":\"BDGK2022033\",\"projPwd\":\"123\",\"projTender\":\"/profile/upload/2022/11/27/1_附3开题报告_20221127144504A002.doc\",\"purchaser\":\"保定学院本级\",\"purchaserOrg\":\"保定市公共资源交易中心（全额）\",\"remark\":\"<ol><li><strong>123</strong></li><li><strong>345</strong></li></ol>\",\"status\":\"1\",\"tenderTemp\":\"/profile/upload/2022/11/27/学校集中采购流程图_20221127231819A006.doc\",\"updateTime\":\"2022-11-27 23:18:21\"}', '{\"msg\":\"发售成功\",\"code\":200}', 0, NULL, '2023-03-26 17:29:00');
+INSERT INTO `sys_oper_log` VALUES (566, '菜单管理', 3, 'com.ruoyi.web.controller.system.SysMenuController.remove()', 'DELETE', 1, 'admin', NULL, '/system/menu/4', '127.0.0.1', '内网IP', '{menuId=4}', '{\"msg\":\"菜单已分配,不允许删除\",\"code\":601}', 0, NULL, '2023-04-15 10:38:45');
+INSERT INTO `sys_oper_log` VALUES (567, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"bid/detailsPage/index.vue\",\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"状态\",\"menuType\":\"C\",\"orderNum\":4,\"params\":{},\"parentId\":2000,\"path\":\"bid/detailsPage/index.vue\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:40:43');
+INSERT INTO `sys_oper_log` VALUES (568, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"bid/projStatus/index.vue\",\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"项目状态\",\"menuType\":\"C\",\"orderNum\":5,\"params\":{},\"parentId\":2008,\"path\":\"bid/projStatus/index.vue\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:42:21');
+INSERT INTO `sys_oper_log` VALUES (569, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"bid/detailsPage/index.vue\",\"createTime\":\"2023-04-15 10:40:43\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2039,\"menuName\":\"详情\",\"menuType\":\"C\",\"orderNum\":4,\"params\":{},\"parentId\":2000,\"path\":\"bid/detailsPage/index.vue\",\"perms\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:42:33');
+INSERT INTO `sys_oper_log` VALUES (570, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"bid/projStatus/index.vue\",\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"项目状态\",\"menuType\":\"C\",\"orderNum\":5,\"params\":{},\"parentId\":2000,\"path\":\"bid/projStatus/index.vue\",\"status\":\"0\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:44:25');
+INSERT INTO `sys_oper_log` VALUES (571, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"bid/detailsPage/index.vue\",\"createTime\":\"2023-04-15 10:40:43\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2039,\"menuName\":\"详情\",\"menuType\":\"C\",\"orderNum\":4,\"params\":{},\"parentId\":2000,\"path\":\"bid/detailsPage/index.vue\",\"perms\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:44:59');
+INSERT INTO `sys_oper_log` VALUES (572, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"folder/folder/index\",\"createTime\":\"2023-01-31 15:57:52\",\"icon\":\"checkbox\",\"isCache\":\"1\",\"isFrame\":\"1\",\"menuId\":2014,\"menuName\":\"文件夹结构信息\",\"menuType\":\"C\",\"orderNum\":1,\"params\":{},\"parentId\":2000,\"path\":\"folder\",\"perms\":\"folder:folder:list\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:45:03');
+INSERT INTO `sys_oper_log` VALUES (573, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"bid/projStatus/index.vue\",\"createTime\":\"2023-04-15 10:44:25\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2041,\"menuName\":\"项目状态\",\"menuType\":\"C\",\"orderNum\":5,\"params\":{},\"parentId\":2000,\"path\":\"bid/projStatus/index.vue\",\"perms\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:45:08');
+INSERT INTO `sys_oper_log` VALUES (574, '投标项目', 1, 'com.ruoyi.bid.controller.TenderProjectController.add()', 'POST', 1, 'admin', NULL, '/tender/project', '127.0.0.1', '内网IP', '{\"bidStatus\":\"1\",\"bidderCompany\":\"中惠\",\"bidderId\":1,\"createTime\":\"2022-11-27 11:03:08\",\"params\":{},\"projId\":1,\"projName\":\"保定学院本级实验实训中心基础设施建设一期（实验室通用教学设备设施）\",\"projNumber\":\"BDGK2022033\",\"purchaser\":\"保定学院本级\",\"remark\":\"<ol><li><strong>123</strong></li><li><strong>345</strong></li></ol>\",\"status\":\"0\",\"tpId\":20,\"updateTime\":\"2022-11-27 23:18:21\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:47:32');
+INSERT INTO `sys_oper_log` VALUES (575, '投标项目', 1, 'com.ruoyi.bid.controller.TenderProjectController.add()', 'POST', 1, 'admin', NULL, '/tender/project', '127.0.0.1', '内网IP', '{\"bidStatus\":\"1\",\"bidderCompany\":\"333\",\"bidderId\":1,\"createTime\":\"2022-11-27 11:03:08\",\"params\":{},\"projId\":1,\"projName\":\"保定学院本级实验实训中心基础设施建设一期（实验室通用教学设备设施）\",\"projNumber\":\"BDGK2022033\",\"purchaser\":\"保定学院本级\",\"remark\":\"<ol><li><strong>123</strong></li><li><strong>345</strong></li></ol>\",\"status\":\"0\",\"tpId\":21,\"updateTime\":\"2022-11-27 23:18:21\",\"userId\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 10:57:37');
+INSERT INTO `sys_oper_log` VALUES (576, '菜单管理', 1, 'com.ruoyi.web.controller.system.SysMenuController.add()', 'POST', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"system/mark_sheet/index.vue\",\"createBy\":\"admin\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuName\":\"评分\",\"menuType\":\"C\",\"orderNum\":2,\"params\":{},\"parentId\":2027,\"path\":\"system/mark_sheet/index.vue\",\"status\":\"0\",\"visible\":\"1\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 11:02:55');
+INSERT INTO `sys_oper_log` VALUES (577, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"component\":\"system/mark_sheet/index.vue\",\"createTime\":\"2023-04-15 11:02:55\",\"icon\":\"#\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":2042,\"menuName\":\"评分\",\"menuType\":\"C\",\"orderNum\":2,\"params\":{},\"parentId\":2027,\"path\":\"system/mark_sheet/index.vue\",\"perms\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 11:03:00');
+INSERT INTO `sys_oper_log` VALUES (578, '菜单管理', 2, 'com.ruoyi.web.controller.system.SysMenuController.edit()', 'PUT', 1, 'admin', NULL, '/system/menu', '127.0.0.1', '内网IP', '{\"children\":[],\"createTime\":\"2022-11-03 13:30:03\",\"icon\":\"tool\",\"isCache\":\"0\",\"isFrame\":\"1\",\"menuId\":3,\"menuName\":\"系统工具\",\"menuType\":\"M\",\"orderNum\":3,\"params\":{},\"parentId\":0,\"path\":\"tool\",\"perms\":\"\",\"query\":\"\",\"status\":\"0\",\"updateBy\":\"admin\",\"visible\":\"0\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:09:28');
+INSERT INTO `sys_oper_log` VALUES (579, '代码生成', 6, 'com.ruoyi.generator.controller.GenController.importTableSave()', 'POST', 1, 'admin', NULL, '/tool/gen/importTable', '127.0.0.1', '内网IP', '\"mark_sheet\"', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:10:23');
+INSERT INTO `sys_oper_log` VALUES (580, '代码生成', 3, 'com.ruoyi.generator.controller.GenController.remove()', 'DELETE', 1, 'admin', NULL, '/tool/gen/8', '127.0.0.1', '内网IP', '{tableIds=8}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:11:03');
+INSERT INTO `sys_oper_log` VALUES (581, '代码生成', 6, 'com.ruoyi.generator.controller.GenController.importTableSave()', 'POST', 1, 'admin', NULL, '/tool/gen/importTable', '127.0.0.1', '内网IP', '\"mark_sheet\"', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:11:07');
+INSERT INTO `sys_oper_log` VALUES (582, '代码生成', 2, 'com.ruoyi.generator.controller.GenController.editSave()', 'PUT', 1, 'admin', NULL, '/tool/gen', '127.0.0.1', '内网IP', '{\"businessName\":\"sheet\",\"className\":\"MarkSheet\",\"columns\":[{\"capJavaField\":\"Id\",\"columnId\":99,\"columnName\":\"id\",\"columnType\":\"int\",\"createBy\":\"admin\",\"createTime\":\"2023-04-15 16:11:07\",\"dictType\":\"\",\"edit\":false,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isPk\":\"1\",\"javaField\":\"id\",\"javaType\":\"Long\",\"list\":false,\"params\":{},\"pk\":true,\"query\":false,\"queryType\":\"EQ\",\"required\":false,\"sort\":1,\"superColumn\":false,\"tableId\":9,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Price\",\"columnComment\":\"价格因素\",\"columnId\":100,\"columnName\":\"price\",\"columnType\":\"decimal(10,2)\",\"createBy\":\"admin\",\"createTime\":\"2023-04-15 16:11:07\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"javaField\":\"price\",\"javaType\":\"BigDecimal\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":false,\"sort\":2,\"superColumn\":false,\"tableId\":9,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Business\",\"columnComment\":\"商务因素\",\"columnId\":101,\"columnName\":\"business\",\"columnType\":\"decimal(10,2)\",\"createBy\":\"admin\",\"createTime\":\"2023-04-15 16:11:07\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"javaField\":\"business\",\"javaType\":\"BigDecimal\",\"list\":true,\"params\":{},\"pk\":false,\"query\":true,\"queryType\":\"EQ\",\"required\":false,\"sort\":3,\"superColumn\":false,\"tableId\":9,\"updateBy\":\"\",\"usableColumn\":false},{\"capJavaField\":\"Techology\",\"columnComment\":\"技术因素\",\"columnId\":102,\"columnName\":\"techology\",\"columnType\":\"decimal(10,2)\",\"createBy\":\"admin\",\"createTime\":\"2023-04-15 16:11:07\",\"dictType\":\"\",\"edit\":true,\"htmlType\":\"input\",\"increment\":false,\"insert\":true,\"isEdit\":\"1\",\"isIncrement\":\"0\",\"isInsert\":\"1\",\"isList\":\"1\",\"isPk\":\"0\",\"isQuery\":\"1\",\"javaField\":\"techology\",\"javaType\":\"BigDecimal\",\"list\":true,\"params\":{},\"pk\":false,\"query\":tru', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:12:27');
+INSERT INTO `sys_oper_log` VALUES (583, '代码生成', 8, 'com.ruoyi.generator.controller.GenController.batchGenCode()', 'GET', 1, 'admin', NULL, '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{}', NULL, 0, NULL, '2023-04-15 16:12:29');
+INSERT INTO `sys_oper_log` VALUES (584, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, 'admin', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":1,\"business\":1,\"params\":{},\"price\":2,\"techology\":1}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLException: Field \'id\' doesn\'t have a default value\r\n### The error may exist in file [D:\\学校\\毕设\\前端\\RuoYi-Vue\\ruoyi-admin\\target\\classes\\mapper\\bid\\MarkSheetMapper.xml]\r\n### The error may involve com.ruoyi.bid.mapper.MarkSheetMapper.insertMarkSheet-Inline\r\n### The error occurred while setting parameters\r\n### SQL: insert into mark_sheet          ( price,             business,             techology,             after )           values ( ?,             ?,             ?,             ? )\r\n### Cause: java.sql.SQLException: Field \'id\' doesn\'t have a default value\n; Field \'id\' doesn\'t have a default value; nested exception is java.sql.SQLException: Field \'id\' doesn\'t have a default value', '2023-04-15 16:22:34');
+INSERT INTO `sys_oper_log` VALUES (585, '角色管理', 2, 'com.ruoyi.web.controller.system.SysRoleController.edit()', 'PUT', 1, 'admin', NULL, '/system/role', '127.0.0.1', '内网IP', '{\"admin\":false,\"createTime\":\"2023-02-24 14:06:25\",\"dataScope\":\"1\",\"delFlag\":\"0\",\"deptCheckStrictly\":true,\"flag\":false,\"menuCheckStrictly\":true,\"menuIds\":[1,107,1035,1036,1037,1038,2027,2036,2042],\"params\":{},\"roleId\":102,\"roleKey\":\"pingshen\",\"roleName\":\"评审专家\",\"roleSort\":\"5\",\"status\":\"0\",\"updateBy\":\"admin\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:27:48');
+INSERT INTO `sys_oper_log` VALUES (586, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '王五', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":1,\"business\":1,\"params\":{},\"price\":2,\"projId\":24,\"techology\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:50:57');
+INSERT INTO `sys_oper_log` VALUES (587, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '王五', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":1,\"business\":1,\"params\":{},\"price\":2,\"projId\":24,\"techology\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:51:00');
+INSERT INTO `sys_oper_log` VALUES (588, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '王五', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":2,\"business\":4,\"params\":{},\"price\":3,\"projId\":24,\"reviewId\":51,\"techology\":3}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:51:57');
+INSERT INTO `sys_oper_log` VALUES (589, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '王五', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":1,\"business\":1,\"params\":{},\"price\":1,\"projId\":24,\"reviewId\":51,\"techology\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 16:53:23');
+INSERT INTO `sys_oper_log` VALUES (590, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '王五', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":2,\"business\":2,\"params\":{},\"price\":2,\"projId\":24,\"reviewId\":51,\"techology\":2,\"total\":2.5}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:00:14');
+INSERT INTO `sys_oper_log` VALUES (591, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '王五', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":2,\"business\":2,\"params\":{},\"price\":2,\"projId\":24,\"reviewId\":51,\"techology\":2,\"total\":10}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:02:39');
+INSERT INTO `sys_oper_log` VALUES (592, '签到', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.singIn()', 'GET', 1, '王五', NULL, '/system/evaluation_experts_information/signIn', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:06:16');
+INSERT INTO `sys_oper_log` VALUES (593, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '王五', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":51,\"projId\":24,\"userId\":107,\"signIn\":\"1\",\"fileId\":117,\"status\":\"0\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"0\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415170703A001.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:07:03');
+INSERT INTO `sys_oper_log` VALUES (594, '签到', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.singIn()', 'GET', 1, '王五', NULL, '/system/evaluation_experts_information/signIn', '127.0.0.1', '内网IP', '{}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:07:41');
+INSERT INTO `sys_oper_log` VALUES (595, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415170828A002.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:08:29');
+INSERT INTO `sys_oper_log` VALUES (596, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '赵六', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":5,\"business\":5,\"params\":{},\"price\":5,\"projId\":23,\"reviewId\":54,\"techology\":5,\"total\":5}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:09:08');
+INSERT INTO `sys_oper_log` VALUES (597, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":54,\"projId\":23,\"userId\":108,\"signIn\":\"1\",\"fileId\":114,\"status\":\"0\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"0\",\"tpId\":18,\"bidderId\":106,\"projName\":\"保定学院学生宿舍空调运营合作项目\",\"projNumber\":\"I1301000075048838001\",\"purchaser\":\"王菲菲\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314165231A005.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415170916A003.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:09:18');
+INSERT INTO `sys_oper_log` VALUES (598, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '王五', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":5,\"business\":5,\"params\":{},\"price\":5,\"projId\":23,\"reviewId\":53,\"techology\":5,\"total\":5}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:11:25');
+INSERT INTO `sys_oper_log` VALUES (599, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '王五', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":53,\"projId\":23,\"userId\":107,\"signIn\":\"1\",\"fileId\":114,\"status\":\"0\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"1\",\"tpId\":18,\"bidderId\":106,\"projName\":\"保定学院学生宿舍空调运营合作项目\",\"projNumber\":\"I1301000075048838001\",\"purchaser\":\"王菲菲\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314165231A005.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415171137A004.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:11:38');
+INSERT INTO `sys_oper_log` VALUES (600, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '王五', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":1,\"business\":1,\"params\":{},\"price\":1,\"projId\":24,\"reviewId\":51,\"techology\":1,\"total\":1}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:23:32');
+INSERT INTO `sys_oper_log` VALUES (601, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '王五', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":51,\"projId\":24,\"userId\":107,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"0\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415172530A001.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:25:31');
+INSERT INTO `sys_oper_log` VALUES (602, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '王五', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":51,\"projId\":24,\"userId\":107,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"0\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415172644A001.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:26:45');
+INSERT INTO `sys_oper_log` VALUES (603, '评分表', 1, 'com.ruoyi.bid.controller.MarkSheetController.add()', 'POST', 1, '赵六', NULL, '/sheet/sheet', '127.0.0.1', '内网IP', '{\"after\":5,\"business\":5,\"params\":{},\"price\":5,\"projId\":24,\"reviewId\":52,\"techology\":5,\"total\":5}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:27:53');
+INSERT INTO `sys_oper_log` VALUES (604, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415172802A002.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:28:04');
+INSERT INTO `sys_oper_log` VALUES (605, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415174937A001.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:49:46');
+INSERT INTO `sys_oper_log` VALUES (606, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":6,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/投标文件货物类政府采购竞争性谈判文件标准文本_20230415175208A002.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:53:20');
+INSERT INTO `sys_oper_log` VALUES (607, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":6,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/投标文件货物类政府采购竞争性谈判文件标准文本_20230415175208A002.doc\"}', NULL, 1, 'java.lang.Integer cannot be cast to java.lang.String', '2023-04-15 17:53:50');
+INSERT INTO `sys_oper_log` VALUES (608, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":6,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/投标文件货物类政府采购竞争性谈判文件标准文本_20230415175208A002.doc\"}', NULL, 1, 'java.lang.Integer cannot be cast to java.lang.String', '2023-04-15 17:53:53');
+INSERT INTO `sys_oper_log` VALUES (609, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":6,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415175418A001.doc\"}', NULL, 1, 'java.lang.Integer cannot be cast to java.lang.String', '2023-04-15 17:54:57');
+INSERT INTO `sys_oper_log` VALUES (610, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":6,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415175418A001.doc,/profile/upload/2023/04/15/曹_20230415175605A002.doc\"}', NULL, 1, 'java.lang.Integer cannot be cast to java.lang.String', '2023-04-15 17:56:11');
+INSERT INTO `sys_oper_log` VALUES (611, '提交评审资料', 0, 'com.ruoyi.bid.controller.EvaluationExpertsInformationController.fileUpload()', 'PUT', 1, '赵六', NULL, '/system/evaluation_experts_information/fileUpload', '127.0.0.1', '内网IP', '{\"reviewId\":52,\"projId\":24,\"userId\":108,\"signIn\":\"1\",\"fileId\":117,\"status\":\"1\",\"isDeleted\":0,\"bidStatus\":4,\"isGroupLeaders\":\"1\",\"tpId\":19,\"bidderId\":106,\"projName\":\"保定学院现代实训中心室外硬化工程\",\"projNumber\":\"I1301000075041515001\",\"purchaser\":\"王光锋\",\"bidderCompany\":\"中惠\",\"fileName\":\"投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc\",\"tenderTemp\":\"/profile/upload/2023/04/15/曹_20230415175725A001.doc\"}', '{\"msg\":\"操作成功\",\"code\":200}', 0, NULL, '2023-04-15 17:57:31');
 
 -- ----------------------------
 -- Table structure for sys_post
@@ -1765,7 +1876,7 @@ CREATE TABLE `sys_post`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`post_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '岗位信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_post
@@ -1795,7 +1906,7 @@ CREATE TABLE `sys_role`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '角色信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_role
@@ -1804,7 +1915,7 @@ INSERT INTO `sys_role` VALUES (1, '超级管理员', 'admin', 1, '1', 1, 1, '0',
 INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', 1, 1, '0', '0', 'admin', '2022-11-03 13:30:03', '', NULL, '普通角色');
 INSERT INTO `sys_role` VALUES (100, '招标用户', 'zhaobiao', 3, '1', 1, 1, '0', '0', 'admin', '2023-02-24 14:05:43', 'admin', '2023-02-24 14:19:23', NULL);
 INSERT INTO `sys_role` VALUES (101, '投标用户', 'toubiao', 4, '1', 1, 1, '0', '0', 'admin', '2023-02-24 14:06:03', 'admin', '2023-03-01 15:36:31', NULL);
-INSERT INTO `sys_role` VALUES (102, '评审专家', 'pingshen', 5, '1', 1, 1, '0', '0', 'admin', '2023-02-24 14:06:25', 'admin', '2023-02-28 09:58:10', NULL);
+INSERT INTO `sys_role` VALUES (102, '评审专家', 'pingshen', 5, '1', 1, 1, '0', '0', 'admin', '2023-02-24 14:06:25', 'admin', '2023-04-15 16:27:48', NULL);
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -1962,6 +2073,7 @@ INSERT INTO `sys_role_menu` VALUES (102, 1037);
 INSERT INTO `sys_role_menu` VALUES (102, 1038);
 INSERT INTO `sys_role_menu` VALUES (102, 2027);
 INSERT INTO `sys_role_menu` VALUES (102, 2036);
+INSERT INTO `sys_role_menu` VALUES (102, 2042);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -1988,12 +2100,12 @@ CREATE TABLE `sys_user`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 110 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', '管理员', '00', 'gly@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2023-03-26 17:26:26', 'admin', '2022-11-03 13:30:03', '', '2023-03-26 17:26:25', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', '管理员', '00', 'gly@163.com', '15888888888', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2023-04-15 10:58:03', 'admin', '2022-11-03 13:30:03', '', '2023-04-15 10:58:02', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '测试', '00', 'cs@qq.com', '15666666666', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', '2023-02-23 13:47:02', 'admin', '2022-11-03 13:30:03', 'admin', '2023-03-14 16:22:32', '测试员');
 INSERT INTO `sys_user` VALUES (100, NULL, 'test', 'test', '00', '', '', '0', '', '$2a$10$4OSuv/O5hV/kGG15Mf7jmuZz4ZxzSJf7dbjc0wu4WVFYdV2bkMq72', '0', '2', '', NULL, 'admin', '2022-11-26 21:27:44', '', NULL, NULL);
 INSERT INTO `sys_user` VALUES (101, NULL, 'test', 'test', '00', '', '', '0', '', '$2a$10$3yOEpufM3KX0rSj2LyIIe.CcEec.5dPG9zfgVjsTlLyIvzJVjxj8O', '0', '2', '', NULL, 'admin', '2022-11-26 21:28:21', '', NULL, NULL);
@@ -2001,9 +2113,9 @@ INSERT INTO `sys_user` VALUES (102, NULL, 'test01', 'test01', '00', '', '', '0',
 INSERT INTO `sys_user` VALUES (103, NULL, 'test', 'test', '00', '', '', '0', '', '$2a$10$nvnP4JzXzLPYjmfb74JVn.M/dO6l/zm2Onr3cnJGmqhzLISVabrVG', '0', '2', '', NULL, 'admin', '2022-11-26 21:34:22', '', NULL, NULL);
 INSERT INTO `sys_user` VALUES (104, 103, 'test01', 'test01', '00', '', '', '0', '', '$2a$10$Bim1NrRD9PmGd87Gcs.FJ.Gm9lvqGVumBlL3EDwZaE8HHb0go5N8K', '0', '2', '', NULL, 'admin', '2022-11-26 21:40:26', '', NULL, NULL);
 INSERT INTO `sys_user` VALUES (105, NULL, '张三', '招标员', '00', '2278686667@qq.com', '15028178706', '0', '', '$2a$10$7jOYraujRgU1FvfrX1f.hOQPgT2HvqA.mj97zKgfGksTUsY31Hqhi', '0', '0', '127.0.0.1', '2023-03-14 19:56:48', 'admin', '2023-02-24 14:01:46', 'admin', '2023-03-14 19:56:48', NULL);
-INSERT INTO `sys_user` VALUES (106, NULL, '李四', '投标员', '00', '2278686666@qq.com', '15028178707', '0', '', '$2a$10$4YLYSaC6dOL62Tse6X1rgun3aXdkFv0tkHIwdXezk1Jwz.L8kBFMy', '0', '0', '127.0.0.1', '2023-03-14 19:51:20', 'admin', '2023-02-24 14:09:08', '', '2023-03-14 19:51:19', NULL);
-INSERT INTO `sys_user` VALUES (107, NULL, '王五', '评标员1', '00', '', '15028178705', '0', '', '$2a$10$0fTj0OW1.2JnMr05r3SvzuV.fM9Wh3eq22XRAiuUTFBTDM/oR1lMi', '0', '0', '127.0.0.1', '2023-03-14 19:18:46', 'admin', '2023-02-24 14:09:43', '', '2023-03-14 19:18:46', NULL);
-INSERT INTO `sys_user` VALUES (108, NULL, '赵六', '评标员2', '00', '', '', '0', '', '$2a$10$TFUYGDtG4HKTcCcMVRuDyu76un5qe/CmGxRwX3SG8i.3RdUtcwboi', '0', '0', '127.0.0.1', '2023-03-14 19:15:44', 'admin', '2023-02-24 14:10:06', '', '2023-03-14 19:15:44', NULL);
+INSERT INTO `sys_user` VALUES (106, NULL, '李四', '投标员', '00', '2278686666@qq.com', '15028178707', '0', '', '$2a$10$4YLYSaC6dOL62Tse6X1rgun3aXdkFv0tkHIwdXezk1Jwz.L8kBFMy', '0', '0', '127.0.0.1', '2023-04-15 17:59:58', 'admin', '2023-02-24 14:09:08', '', '2023-04-15 17:59:58', NULL);
+INSERT INTO `sys_user` VALUES (107, NULL, '王五', '评标员1', '00', '', '15028178705', '0', '', '$2a$10$0fTj0OW1.2JnMr05r3SvzuV.fM9Wh3eq22XRAiuUTFBTDM/oR1lMi', '0', '0', '127.0.0.1', '2023-04-15 17:10:01', 'admin', '2023-02-24 14:09:43', '', '2023-04-15 17:10:01', NULL);
+INSERT INTO `sys_user` VALUES (108, NULL, '赵六', '评标员2', '00', '', '', '0', '', '$2a$10$TFUYGDtG4HKTcCcMVRuDyu76un5qe/CmGxRwX3SG8i.3RdUtcwboi', '0', '0', '127.0.0.1', '2023-04-15 17:27:19', 'admin', '2023-02-24 14:10:06', '', '2023-04-15 17:27:19', NULL);
 INSERT INTO `sys_user` VALUES (109, NULL, '曹浩博', '曹浩博', '00', '', '', '0', '', '$2a$10$wmWCwy.XxoJHXugSdqlELey.XFUkRxCEBf9zeER3vHMlCLqubn5pG', '0', '0', '127.0.0.1', '2023-03-12 18:30:08', '', '2023-03-12 18:28:39', 'admin', '2023-03-16 16:10:45', NULL);
 
 -- ----------------------------
@@ -2104,12 +2216,13 @@ CREATE TABLE `tender_project`  (
   `bid_status` char(1) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '项目状态（0待发售 1发售中 2开标中 3 待评标 4评审中 5评审完成 6已终止 7已完成',
   `user_id` bigint(0) NULL DEFAULT NULL COMMENT '用户id',
   PRIMARY KEY (`tp_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '投标项目表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '投标项目表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tender_project
 -- ----------------------------
 INSERT INTO `tender_project` VALUES (18, 106, 23, 114, '保定学院学生宿舍空调运营合作项目', 'I1301000075048838001', '王菲菲', '中惠', '投标文件货物类政府采购竞争性谈判文件标准文本_20230314165231A005.doc', '李四', '2023-03-14 16:52:33', '1', '<h1 class=\"ql-align-center\">保定学院学生宿舍空调运营合作项目招标公告</h1><p><br></p>', '1', 106);
 INSERT INTO `tender_project` VALUES (19, 106, 24, 117, '保定学院现代实训中心室外硬化工程', 'I1301000075041515001', '王光锋', '中惠', '投标文件货物类政府采购竞争性谈判文件标准文本_20230314191122A003.doc', '李四', '2023-03-14 19:11:24', '1', '<p class=\"ql-align-center\"><strong>保定学院现代实训中心室外硬化工程招标公告</strong></p>', '1', NULL);
+INSERT INTO `tender_project` VALUES (21, 1, 1, NULL, '保定学院本级实验实训中心基础设施建设一期（实验室通用教学设备设施）', 'BDGK2022033', '保定学院本级', '333', NULL, NULL, NULL, '0', '<ol><li><strong>123</strong></li><li><strong>345</strong></li></ol>', '1', 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

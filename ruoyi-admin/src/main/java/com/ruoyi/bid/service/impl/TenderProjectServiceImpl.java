@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.ruoyi.bid.domain.BidList;
+import com.ruoyi.bid.mapper.BidListMapper;
 import com.ruoyi.common.utils.SecurityUtils;
 import com.ruoyi.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ public class TenderProjectServiceImpl implements ITenderProjectService
 {
     @Autowired
     private TenderProjectMapper tenderProjectMapper;
+    @Autowired
+    private BidListMapper bidListMapper;
 
     /**
      * 查询投标项目
@@ -45,6 +49,7 @@ public class TenderProjectServiceImpl implements ITenderProjectService
     @Override
     public List<TenderProject> selectTenderProjectList(TenderProject tenderProject)
     {
+
         return tenderProjectMapper.selectTenderProjectList(tenderProject);
     }
 
