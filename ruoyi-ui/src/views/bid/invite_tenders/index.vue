@@ -168,8 +168,13 @@
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
-
-          <el-button
+          <el-button v-if="scope.row.status==5"
+                     size="mini"
+                     type="test"
+                     icon="el-icon-position"
+                     @click="letter_of_acceptance(scope.row)"
+          >查看中标单位
+          </el-button>
           <el-button
             size="mini"
             type="text"
@@ -332,6 +337,50 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+
+
+    <el-dialog :title="title" :visible.sync="zhongbiaoOpen">
+      <el-table
+        :data="zhongbiaoData"
+        style="width: 100%">
+        <el-table-column
+          prop="id"
+          label="id">
+        </el-table-column>
+        <el-table-column
+          prop="price"
+          label="价格因素">
+        </el-table-column>
+        <el-table-column
+          prop="business"
+          label="商务因素">
+        </el-table-column>
+        <el-table-column
+          prop="techology"
+          label="技术因素">
+        </el-table-column>
+        <el-table-column
+          prop="after"
+          label="售后服务">
+        </el-table-column>
+        <el-table-column
+          prop="reviewId"
+          label="专家id">
+        </el-table-column>
+        <el-table-column
+          prop="total"
+          label="总分">
+        </el-table-column>
+        <el-table-column
+          prop="projIdByName"
+          label="项目名称">
+        </el-table-column>
+        <el-table-column
+          prop="tenderProjectIdByName"
+          label="中标单位">
+        </el-table-column>
+      </el-table>
+    </el-dialog>
   </div>
 </template>
 
@@ -347,6 +396,7 @@ import {
   randomExpert
 } from "@/api/bid/invite_tenders";
 import {getToken} from "@/utils/auth";
+import {listSheet, getSheet, delSheet, addSheet, updateSheet, listprojId} from "@/api/sheet/sheet";
 
 export default {
   name: "Invite_tenders",
@@ -354,6 +404,7 @@ export default {
     return {
       updateUrl: process.env.VUE_APP_BASE_API + "/bid/invite_tenders/uploadFile",
       fileList: [],
+      zhongbiaoData: [],
       number: 0,
       uploadList: [],
       baseUrl: process.env.VUE_APP_BASE_API,
@@ -379,6 +430,7 @@ export default {
       open: false,
       tiqumaOpen: false,
       pingbiaoopen: false,
+      zhongbiaoOpen: false,
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -418,6 +470,19 @@ export default {
 
   },
   methods: {
+    //查看中标单位
+    letter_of_acceptance(row) {
+      this.zhongbiaoOpen = true;
+      console.log(typeof row.projId)
+      var s = row.projId
+      console.log(s)
+
+      listprojId(s).then(res => {
+        console.log(res)
+        this.zhongbiaoData = res.rows
+      })
+
+    },
     statusupdate(row) {
       this.$confirm('你确定要修改项目状态吗？', '提示', {
         confirmButtonText: '确定',

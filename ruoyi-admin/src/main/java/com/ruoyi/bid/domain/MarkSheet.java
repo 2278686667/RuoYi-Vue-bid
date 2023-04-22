@@ -57,6 +57,16 @@ public class MarkSheet extends BaseEntity {
     @Excel(name = "专家")
     private Long reviewId;
 
+    private Long tenderProjectId;
+
+    public Long getTenderProjectId() {
+        return tenderProjectId;
+    }
+
+    public void setTenderProjectId(Long tenderProjectId) {
+        this.tenderProjectId = tenderProjectId;
+    }
+
     private BigDecimal total;
 
     public void setId(Long id) {

@@ -288,9 +288,11 @@ export default {
         path: 'system/mark_sheet/index.vue',
         query: {
           projId: row.projId,
-          reviewId: row.reviewId
+          reviewId: row.reviewId,
+          tpId: row.tpId
         }
       })
+      // this.open=true
     },
     //提交评审资料
     submitFormFile(row) {

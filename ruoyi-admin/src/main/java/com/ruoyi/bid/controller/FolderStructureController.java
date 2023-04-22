@@ -65,11 +65,6 @@ public class FolderStructureController extends BaseController
             fileInfomations = fileInfomationMapper.selectFileInfomationByFolderIdAndProjId(folderStructure.getFolderId(), folderStructure.getProjId());
             return getDataTable(fileInfomations);
         }
-
-
-
-
-
     }
 
     /**
