@@ -1,19 +1,21 @@
 <template>
   <div class="app-container home">
-    <test></test>
+    <piechart></piechart>
   </div>
 </template>
 
 <script>
-import test from './test'
+
 import Test from "./test";
+import piechart from '../components/PieChart'
 export default {
   name: "Index",
-  components: {Test},
+  components: {piechart, Test},
   data() {
     return {
       // 版本号
       version: "3.8.4",
+
     };
   },
   methods: {

@@ -60,9 +60,9 @@
         <div style="float: right;" v-if="register">
           <router-link class="link-type" :to="'/register'">立即注册</router-link>
         </div>
-        <div style="margin-top: 20px">
-          <el-button type="primary" @click="test">测试</el-button>
-        </div>
+<!--        <div style="margin-top: 20px">-->
+<!--&lt;!&ndash;          <el-button type="primary" @click="test">测试</el-button>&ndash;&gt;-->
+<!--        </div>-->
       </el-form-item>
     </el-form>
 

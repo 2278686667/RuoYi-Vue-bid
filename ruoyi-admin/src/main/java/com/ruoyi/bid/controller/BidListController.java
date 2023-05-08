@@ -1,14 +1,10 @@
 package com.ruoyi.bid.controller;
+import cn.hutool.core.lang.UUID;
 
-import com.ruoyi.bid.domain.BidList;
-import com.ruoyi.bid.domain.EvaluationExpertsInformation;
-import com.ruoyi.bid.domain.FileInfomation;
-import com.ruoyi.bid.domain.FolderStructure;
+
+import com.ruoyi.bid.domain.*;
 import com.ruoyi.bid.enums.FolderStructureState;
-import com.ruoyi.bid.service.IBidListService;
-import com.ruoyi.bid.service.IEvaluationExpertsInformationService;
-import com.ruoyi.bid.service.IFileInfomationService;
-import com.ruoyi.bid.service.IFolderStructureService;
+import com.ruoyi.bid.service.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -66,6 +62,9 @@ public class BidListController extends BaseController {
     @Autowired
     private IFileInfomationService fileInfomationService;
 
+    @Autowired
+    private INewZbggIndexService newZbggIndexService;
+
 
     /**
      * 查询招投标列表
@@ -102,10 +101,26 @@ public class BidListController extends BaseController {
     /**
      * 新增招投标
      */
+    @Transactional
     @PreAuthorize("@ss.hasPermi('bid:invite_tenders:add')")
     @Log(title = "招投标", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody BidList bidList) {
+        NewZbggIndex newZbggIndex=new NewZbggIndex();
+        newZbggIndex.setGgcode(UUID.fastUUID().toString());
+        newZbggIndex.setGgname(bidList.getProjName());
+        newZbggIndex.setGgfbtime(new Date());
+        newZbggIndex.setHyname("学校");
+        newZbggIndex.setZbr(bidList.getPurchaser());
+        newZbggIndex.setZbdl(bidList.getPurchaserOrg());
+        newZbggIndex.setGgtype("zbgg");
+        newZbggIndex.setTypename("招标公告");
+        newZbggIndex.setGgendtime(new Date());
+        newZbggIndex.setGgcontent(bidList.getRemark());
+        newZbggIndex.setAddtime(new Date());
+
+
+        int i = newZbggIndexService.insertNewZbggIndex(newZbggIndex);
         return toAjax(bidListService.insertBidList(bidList));
     }
 

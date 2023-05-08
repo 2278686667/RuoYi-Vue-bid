@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bid.mapper.MarkSheetMapper">
+    
+    <resultMap type="MarkSheet" id="MarkSheetResult">
+        <result property="id"    column="id"    />
+        <result property="price"    column="price"    />
+        <result property="business"    column="business"    />
+        <result property="techology"    column="techology"    />
+        <result property="after"    column="after"    />
+        <result property="projId"    column="proj_Id"    />
+        <result property="reviewId"    column="review_id"    />
+        <result property="total"    column="total"    />
+        <result property="tenderProjectId"    column="tender_project_id"    />
+        <result property="isSummary"    column="isSummary"    />
+    </resultMap>
+
+    <sql id="selectMarkSheetVo">
+        select id, price, business, techology, after, proj_Id, review_id,total,tender_project_id,isSummary from mark_sheet
+    </sql>
+
+    <select id="selectMarkSheetList" parameterType="MarkSheet" resultMap="MarkSheetResult">
+        <include refid="selectMarkSheetVo"/>
+        <where>  
+            <if test="price != null "> and price = #{price}</if>
+            <if test="business != null "> and business = #{business}</if>
+            <if test="techology != null "> and techology = #{techology}</if>
+            <if test="after != null "> and after = #{after}</if>
+            <if test="projId != null "> and proj_Id = #{projId}</if>
+            <if test="reviewId != null "> and review_id = #{reviewId}</if>
+            <if test="tenderProjectId != null "> and tender_project_id = #{tenderProjectId}</if>
+            <if test="isSummary != null "> and isSummary = #{isSummary}</if>
+        </where>
+    </select>
+    
+    <select id="selectMarkSheetById" parameterType="Long" resultMap="MarkSheetResult">
+        <include refid="selectMarkSheetVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMarkSheet" parameterType="MarkSheet">
+        insert into mark_sheet
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="price != null">price,</if>
+            <if test="business != null">business,</if>
+            <if test="techology != null">techology,</if>
+            <if test="after != null">after,</if>
+            <if test="projId != null">proj_Id,</if>
+            <if test="reviewId != null">review_id,</if>
+            <if test="total != null">total,</if>
+            <if test="tenderProjectId != null">tender_project_id,</if>
+            <if test="isSummary != null">isSummary,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="price != null">#{price},</if>
+            <if test="business != null">#{business},</if>
+            <if test="techology != null">#{techology},</if>
+            <if test="after != null">#{after},</if>
+            <if test="projId != null">#{projId},</if>
+            <if test="reviewId != null">#{reviewId},</if>
+            <if test="total != null">#{total},</if>
+            <if test="tenderProjectId != null">#{tenderProjectId},</if>
+            <if test="isSummary != null">#{isSummary},</if>
+         </trim>
+    </insert>
+
+    <update id="updateMarkSheet" parameterType="MarkSheet">
+        update mark_sheet
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="price != null">price = #{price},</if>
+            <if test="business != null">business = #{business},</if>
+            <if test="techology != null">techology = #{techology},</if>
+            <if test="after != null">after = #{after},</if>
+            <if test="projId != null">proj_Id = #{projId},</if>
+            <if test="reviewId != null">review_id = #{reviewId},</if>
+            <if test="tenderProjectId != null">tender_project_id = #{tenderProjectId},</if>
+            <if test="isSummary != null">review_id = #{isSummary},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteMarkSheetById" parameterType="Long">
+        delete from mark_sheet where id = #{id}
+    </delete>
+
+    <delete id="deleteMarkSheetByIds" parameterType="String">
+        delete from mark_sheet where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

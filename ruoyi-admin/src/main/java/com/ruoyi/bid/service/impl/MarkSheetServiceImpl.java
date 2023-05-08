@@ -65,7 +65,7 @@ public class MarkSheetServiceImpl implements IMarkSheetService {
         BigDecimal business = markSheet.getBusiness();
         BigDecimal techology = markSheet.getTechology();
         BigDecimal after = markSheet.getAfter();
-
+        //平局分
         BigDecimal divide = price.add(business).add(techology).add(after).divide(BigDecimal.valueOf(4));
         markSheet.setTotal(divide);
         Long reviewId = markSheet.getReviewId();
@@ -74,8 +74,49 @@ public class MarkSheetServiceImpl implements IMarkSheetService {
         evaluationExpertsInformation.setReviewId(reviewId);
         evaluationExpertsInformation.setStatus("1");
         int i = evaluationExpertsInformationMapper.updateEvaluationExpertsInformation(evaluationExpertsInformation);
+        //新增
+        int i1 = markSheetMapper.insertMarkSheet(markSheet);
+        //新增过后，根据projId和tenderProjectid查询一共有多少条记录
+        MarkSheet markSheetByProjIdAndTenderProjectId=new MarkSheet();
+        markSheetByProjIdAndTenderProjectId.setProjId(markSheet.getProjId());
+        markSheetByProjIdAndTenderProjectId.setTenderProjectId(markSheet.getTenderProjectId());
+        List<MarkSheet> markSheets = markSheetMapper.selectMarkSheetList(markSheetByProjIdAndTenderProjectId);
+        //查询一共分配了几个专家
+        EvaluationExpertsInformation evaluationExpertsInformationByProjId=new EvaluationExpertsInformation();
+        evaluationExpertsInformationByProjId.setProjId(markSheet.getProjId());
+        List<EvaluationExpertsInformation> evaluationExpertsInformations = evaluationExpertsInformationMapper.selectEvaluationExpertsInformationList(evaluationExpertsInformationByProjId);
+        //如果所有评分记录和专家记录总数相同说明已经评分完成
+        if (markSheets.size()==evaluationExpertsInformations.size()){
+            MarkSheet markSheetTotal=new MarkSheet();
+            BigDecimal priceT=BigDecimal.ZERO;
+            BigDecimal businessT=BigDecimal.ZERO;
+            BigDecimal techologyT=BigDecimal.ZERO;
+            BigDecimal afterT=BigDecimal.ZERO;
+            BigDecimal totalT=BigDecimal.ZERO;
 
-        return markSheetMapper.insertMarkSheet(markSheet);
+
+            //求平均分
+            for (MarkSheet sheet : markSheets) {
+                 priceT= priceT.add(sheet.getPrice());
+                businessT=businessT.add(sheet.getBusiness());
+                techologyT=techologyT.add(sheet.getTechology());
+                afterT=afterT.add(sheet.getAfter());
+                totalT=totalT.add(sheet.getTotal());
+
+            }
+            markSheetTotal.setPrice(priceT.divide(BigDecimal.valueOf(markSheets.size())));
+            markSheetTotal.setBusiness(businessT.divide(BigDecimal.valueOf(markSheets.size())));
+            markSheetTotal.setTechology(techologyT.divide(BigDecimal.valueOf(markSheets.size())));
+            markSheetTotal.setAfter(afterT.divide(BigDecimal.valueOf(markSheets.size())));
+            markSheetTotal.setTotal(totalT.divide(BigDecimal.valueOf(markSheets.size())));
+            markSheetTotal.setProjId(markSheet.getProjId());
+            markSheetTotal.setTenderProjectId(markSheet.getTenderProjectId());
+            markSheetTotal.setIsSummary(1L);
+
+
+            markSheetMapper.insertMarkSheet(markSheetTotal);
+        }
+        return i1;
     }
 
     /**

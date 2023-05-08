@@ -37,7 +37,10 @@ import DictTag from '@/components/DictTag'
 import VueMeta from 'vue-meta'
 // 字典数据组件
 import DictData from '@/components/DictData'
-
+// 引入echarts
+import echarts from 'echarts'
+//一般都要加个$加到vue的原型链上，方便引用
+Vue.prototype.$echarts = echarts
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
 Vue.prototype.getConfigKey = getConfigKey

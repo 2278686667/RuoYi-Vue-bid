@@ -139,6 +139,7 @@ public class MarkSheetController extends BaseController {
         startPage();
         MarkSheet markSheet = new MarkSheet();
         markSheet.setProjId(Long.valueOf(id));
+        markSheet.setIsSummary(1L);
         List<MarkSheet> list = markSheetService.selectMarkSheetList(markSheet);
         List<Map<String, Object>> collect = list.stream().map(new Function<MarkSheet, Map<String, Object>>() {
             @Override

@@ -362,10 +362,7 @@
         <el-table-column
           prop="after"
           label="售后服务">
-        </el-table-column>
-        <el-table-column
-          prop="reviewId"
-          label="专家id">
+
         </el-table-column>
         <el-table-column
           prop="total"

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <el-button @click="openTZGG">测试</el-button>
+<!--  <el-button @click="openTZGG">测试</el-button>-->
 </div>
 </template>
 

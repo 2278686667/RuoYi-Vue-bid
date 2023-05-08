@@ -59,6 +59,16 @@ public class MarkSheet extends BaseEntity {
 
     private Long tenderProjectId;
 
+    private Long isSummary;
+
+    public Long getIsSummary() {
+        return isSummary;
+    }
+
+    public void setIsSummary(Long isSummary) {
+        this.isSummary = isSummary;
+    }
+
     public Long getTenderProjectId() {
         return tenderProjectId;
     }

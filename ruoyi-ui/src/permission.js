@@ -22,12 +22,28 @@ router.beforeEach((to, from, next) => {
       if (store.getters.roles.length === 0) {
         isRelogin.show = true
         // 判断当前用户是否已拉取完user_info信息
-        store.dispatch('GetInfo').then(() => {
+        store.dispatch('GetInfo').then((res) => {
           isRelogin.show = false
           store.dispatch('GenerateRoutes').then(accessRoutes => {
             // 根据roles权限生成可访问的路由表
             router.addRoutes(accessRoutes) // 动态添加可访问路由表
-            next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
+
+            let path='/'
+            console.log(res.roles)
+            if (res.roles.indexOf("pingshen")>-1){
+
+              path='/zbgg/zbgg'
+            }else if (res.roles.indexOf("zhaobiao")>-1){
+              path='/zbgg/zbgg'
+            }else if (res.roles.indexOf("toubiao")>-1){
+              path='/zbgg/zbgg'
+            }
+            if (to.path==='/index'){
+              next({path,replace:true})
+            }else {
+              next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
+            }
+
           })
         }).catch(err => {
             store.dispatch('LogOut').then(() => {

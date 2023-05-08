@@ -115,12 +115,12 @@
       <!--      <el-table-column label="评审专家Id" align="center" prop="userId" min-width="8%"/>-->
       <!--      <el-table-column label="文件id" align="center" prop="fileId" />-->
       <!--      <el-table-column label="项目id" align="center" prop="projId" />-->
-      <el-table-column label="评审状态" align="center" prop="status" min-width="8%">
-        <template slot-scope="scope">
-          <el-button type="success" size="mini" v-if="scope.row.status==2" round>已提交</el-button>
-          <el-button type="primary" size="mini" v-else round>未提交</el-button>
-        </template>
-      </el-table-column>
+<!--      <el-table-column label="评审状态" align="center" prop="status" min-width="8%">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-button type="success" size="mini" v-if="scope.row.status==2" round>已提交</el-button>-->
+<!--          <el-button type="primary" size="mini" v-else round>未提交</el-button>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
       <!--      <el-table-column label="是否删除(0-未删, 1-已删)" align="center" prop="isDeleted" min-width="8%">-->
       <!--        <template slot-scope="scope">-->
       <!--          <el-button type="success" size="mini" v-if="scope.isDeleted==1">已删除</el-button>-->

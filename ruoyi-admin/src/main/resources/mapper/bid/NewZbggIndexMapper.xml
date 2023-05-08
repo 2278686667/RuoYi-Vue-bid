@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.bid.mapper.NewZbggIndexMapper">
+    
+    <resultMap type="NewZbggIndex" id="NewZbggIndexResult">
+        <result property="ggcode"    column="GGCODE"    />
+        <result property="ggname"    column="GGNAME"    />
+        <result property="ggfbtime"    column="GGFBTIME"    />
+        <result property="hyname"    column="HYNAME"    />
+        <result property="zbr"    column="ZBR"    />
+        <result property="zbdl"    column="ZBDL"    />
+        <result property="govchild"    column="GOVCHILD"    />
+        <result property="ggtype"    column="GGTYPE"    />
+        <result property="typename"    column="TYPENAME"    />
+        <result property="ggendtime"    column="GGENDTIME"    />
+        <result property="ggcontent"    column="GGCONTENT"    />
+        <result property="addtime"    column="ADDTIME"    />
+    </resultMap>
+
+    <sql id="selectNewZbggIndexVo">
+        select GGCODE, GGNAME, GGFBTIME, HYNAME, ZBR, ZBDL, GOVCHILD, GGTYPE, TYPENAME, GGENDTIME, GGCONTENT, ADDTIME from new_zbgg_index
+    </sql>
+
+    <select id="selectNewZbggIndexList" parameterType="NewZbggIndex" resultMap="NewZbggIndexResult">
+        <include refid="selectNewZbggIndexVo"/>
+        <where>  
+            <if test="ggcode != null  and ggcode != ''"> and GGCODE = #{ggcode}</if>
+            <if test="ggname != null  and ggname != ''"> and GGNAME like concat('%', #{ggname}, '%')</if>
+            <if test="ggfbtime != null "> and GGFBTIME = #{ggfbtime}</if>
+            <if test="hyname != null  and hyname != ''"> and HYNAME like concat('%', #{hyname}, '%')</if>
+            <if test="zbr != null  and zbr != ''"> and ZBR = #{zbr}</if>
+            <if test="zbdl != null  and zbdl != ''"> and ZBDL = #{zbdl}</if>
+            <if test="govchild != null  and govchild != ''"> and GOVCHILD = #{govchild}</if>
+            <if test="ggtype != null  and ggtype != ''"> and GGTYPE = #{ggtype}</if>
+            <if test="typename != null  and typename != ''"> and TYPENAME like concat('%', #{typename}, '%')</if>
+            <if test="ggendtime != null "> and GGENDTIME = #{ggendtime}</if>
+            <if test="ggcontent != null  and ggcontent != ''"> and GGCONTENT = #{ggcontent}</if>
+            <if test="addtime != null "> and ADDTIME = #{addtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectNewZbggIndexByGgcode" parameterType="String" resultMap="NewZbggIndexResult">
+        <include refid="selectNewZbggIndexVo"/>
+        where GGCODE = #{ggcode}
+    </select>
+        
+    <insert id="insertNewZbggIndex" parameterType="NewZbggIndex">
+        insert into new_zbgg_index
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ggcode != null and ggcode != ''">GGCODE,</if>
+            <if test="ggname != null">GGNAME,</if>
+            <if test="ggfbtime != null">GGFBTIME,</if>
+            <if test="hyname != null">HYNAME,</if>
+            <if test="zbr != null">ZBR,</if>
+            <if test="zbdl != null">ZBDL,</if>
+            <if test="govchild != null">GOVCHILD,</if>
+            <if test="ggtype != null">GGTYPE,</if>
+            <if test="typename != null">TYPENAME,</if>
+            <if test="ggendtime != null">GGENDTIME,</if>
+            <if test="ggcontent != null">GGCONTENT,</if>
+            <if test="addtime != null">ADDTIME,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ggcode != null and ggcode != ''">#{ggcode},</if>
+            <if test="ggname != null">#{ggname},</if>
+            <if test="ggfbtime != null">#{ggfbtime},</if>
+            <if test="hyname != null">#{hyname},</if>
+            <if test="zbr != null">#{zbr},</if>
+            <if test="zbdl != null">#{zbdl},</if>
+            <if test="govchild != null">#{govchild},</if>
+            <if test="ggtype != null">#{ggtype},</if>
+            <if test="typename != null">#{typename},</if>
+            <if test="ggendtime != null">#{ggendtime},</if>
+            <if test="ggcontent != null">#{ggcontent},</if>
+            <if test="addtime != null">#{addtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNewZbggIndex" parameterType="NewZbggIndex">
+        update new_zbgg_index
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ggname != null">GGNAME = #{ggname},</if>
+            <if test="ggfbtime != null">GGFBTIME = #{ggfbtime},</if>
+            <if test="hyname != null">HYNAME = #{hyname},</if>
+            <if test="zbr != null">ZBR = #{zbr},</if>
+            <if test="zbdl != null">ZBDL = #{zbdl},</if>
+            <if test="govchild != null">GOVCHILD = #{govchild},</if>
+            <if test="ggtype != null">GGTYPE = #{ggtype},</if>
+            <if test="typename != null">TYPENAME = #{typename},</if>
+            <if test="ggendtime != null">GGENDTIME = #{ggendtime},</if>
+            <if test="ggcontent != null">GGCONTENT = #{ggcontent},</if>
+            <if test="addtime != null">ADDTIME = #{addtime},</if>
+        </trim>
+        where GGCODE = #{ggcode}
+    </update>
+
+    <delete id="deleteNewZbggIndexByGgcode" parameterType="String">
+        delete from new_zbgg_index where GGCODE = #{ggcode}
+    </delete>
+
+    <delete id="deleteNewZbggIndexByGgcodes" parameterType="String">
+        delete from new_zbgg_index where GGCODE in 
+        <foreach item="ggcode" collection="array" open="(" separator="," close=")">
+            #{ggcode}
+        </foreach>
+    </delete>
+</mapper>
